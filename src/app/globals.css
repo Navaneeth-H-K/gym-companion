@@ -1,26 +1,183 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ------------------------------------------------------------------ *
+ * Design tokens — single source of truth for color, type, motion.
+ * Components consume these via Tailwind utilities (bg-bg, text-accent,
+ * border-line, …). Never hard-code hex in components.
+ * `@theme static` (not plain @theme): the ring, RPE chips, and charts
+ * are SVG reading raw var(--color-*), which Tailwind's usage scan
+ * can't see — static emits every token unconditionally.
+ * ------------------------------------------------------------------ */
+@theme static {
+  /* Surfaces — OLED true black canvas; elevation = lighter surface, never shadows */
+  --color-bg: #000000;
+  --color-bg-1: #0b0d10;
+  --color-bg-2: #14171d;
+  --color-bg-3: #1c2028;
+
+  /* Ink */
+  --color-fg: #f2f4f8;
+  --color-fg-muted: #9aa3b2;
+  --color-fg-faint: #5c6572;
+
+  /* Hairlines */
+  --color-line: #ffffff14;
+  --color-line-strong: #ffffff29;
+
+  /* Accent A — "Terminal Lime" (site identity).
+     accent = interactive + completion · accent-2 = rest/recovery only. */
+  --color-accent: #c8f050;
+  --color-accent-2: #45e6d0;
+  --color-accent-ink: #0a0c06;
+  --color-accent-dim: #c8f05029;
+  --color-accent-2-dim: #45e6d029;
+
+  /* Semantic — success is sync-only; danger is destructive-only (a missed
+     day is never red); gold appears only on PRs/milestones. */
+  --color-success: #4ade80;
+  --color-danger: #ff5c5c;
+  --color-gold: #edb84c;
+  --color-gold-ink: #171003;
+
+  /* RPE heat ramp, 6 → 10 in half steps. Chips always carry numerals. */
+  --color-rpe-6: #45e6d0;
+  --color-rpe-65: #8feb90;
+  --color-rpe-7: #c8f050;
+  --color-rpe-75: #e2e148;
+  --color-rpe-8: #ffd23f;
+  --color-rpe-85: #ffb03e;
+  --color-rpe-9: #ff8a3d;
+  --color-rpe-95: #ff6b4e;
+  --color-rpe-10: #ff4d5e;
+
+  /* Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Type */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  /* Easings (mirrored in src/lib/motion.ts) */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  * {
+    border-color: var(--color-line);
+    min-width: 0;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    /* A sweaty downward swipe mid-workout must never pull-to-refresh. */
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  button, [role="button"] {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  input, textarea { font: inherit; }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------------------------------------------ *
+ * Utilities
+ * ------------------------------------------------------------------ */
+@layer utilities {
+  /* Every numeral that changes wears this (steppers, timers, counters). */
+  .tnum {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Uppercase mono kicker — "TODAY · PUSH #1", field labels. */
+  .overline-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .safe-top { padding-top: env(safe-area-inset-top); }
+  .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 8px); }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* ------------------------------------------------------------------ *
+ * Keyframes
+ * ------------------------------------------------------------------ */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+@keyframes pulse-track {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.65; }
+}
+@keyframes shake-x {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.skeleton {
+  background: var(--color-bg-2);
+  animation: pulse-soft 800ms var(--ease-in-out-quint) infinite alternate;
+}
+.animate-shake { animation: shake-x 240ms var(--ease-out-expo); }
+
+/* Global reduced-motion contract: neutralize animation/transitions.
+   Information-bearing motion (rest-timer ring) opts back in via JS. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
