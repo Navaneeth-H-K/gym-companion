@@ -13,9 +13,10 @@ declare const self: ServiceWorkerGlobalScope;
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
-  // Updates are user-controlled: the app shows an "Update ready" toast and
-  // messages SKIP_WAITING — never mid-workout.
-  skipWaiting: false,
+  // Auto-activate. Waiting for a toast tap left the phone stranded on an
+  // old build when the toast didn't surface; the client decides when to
+  // actually reload (never mid-workout), so taking control early is safe.
+  skipWaiting: true,
   clientsClaim: true,
   navigationPreload: true,
   runtimeCaching: [

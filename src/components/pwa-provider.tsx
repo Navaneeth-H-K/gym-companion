@@ -1,64 +1,50 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { SerwistProvider, useSerwist } from "@serwist/turbopack/react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { AnimatePresence, motion } from "motion/react";
 import { activeSession } from "@/lib/selectors";
-import { springSheet } from "@/lib/motion";
 
 /**
- * Update toast: a waiting service worker offers "Update ready" →
- * SKIP_WAITING → reload on controlling change. Suppressed while a
- * workout session is active — never reload mid-set (the rest timer would
- * survive via its persisted endsAt, but the interruption wouldn't).
+ * Update handling. The service worker activates immediately; this decides
+ * when the open page actually swaps to it.
+ *
+ * A new build reloads on its own — silently, as soon as the worker takes
+ * control — EXCEPT while a workout is in progress, where a reload mid-set
+ * would be jarring. In that case the reload is deferred until the session
+ * ends (the rest timer and every logged set survive it either way, since
+ * both live in IndexedDB).
  */
-function UpdateToast() {
+function UpdateGate() {
   const { serwist } = useSerwist();
-  const [waiting, setWaiting] = useState(false);
   const active = useLiveQuery(activeSession, []);
+  const pending = useRef(false);
+  const reloading = useRef(false);
+
+  const inWorkout = !!active;
 
   useEffect(() => {
     if (!serwist) return;
-    const onWaiting = () => setWaiting(true);
-    serwist.addEventListener("waiting", onWaiting);
-    return () => serwist.removeEventListener("waiting", onWaiting);
-  }, [serwist]);
-
-  useEffect(() => {
-    if (!serwist) return;
-    let reloading = false;
     const onControlling = (event: { isUpdate?: boolean }) => {
-      if (reloading || !event.isUpdate) return;
-      reloading = true;
-      window.location.reload();
+      if (!event.isUpdate) return; // first install — nothing to swap
+      pending.current = true;
+      if (!inWorkout && !reloading.current) {
+        reloading.current = true;
+        window.location.reload();
+      }
     };
     serwist.addEventListener("controlling", onControlling);
     return () => serwist.removeEventListener("controlling", onControlling);
-  }, [serwist]);
+  }, [serwist, inWorkout]);
 
-  const show = waiting && !active;
+  // A workout just ended with an update parked — apply it now.
+  useEffect(() => {
+    if (inWorkout || !pending.current || reloading.current) return;
+    reloading.current = true;
+    window.location.reload();
+  }, [inWorkout]);
 
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          initial={{ y: -48, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: springSheet }}
-          exit={{ y: -48, opacity: 0, transition: { duration: 0.14 } }}
-          className="fixed inset-x-5 top-3 z-[70] mx-auto flex h-12 max-w-md items-center justify-between rounded-full bg-bg-3 px-5 shadow-[0_0_0_1px_var(--color-line)] safe-top"
-        >
-          <span className="text-[0.8125rem] font-medium">Update ready</span>
-          <button
-            onClick={() => serwist?.messageSkipWaiting()}
-            className="text-[0.8125rem] font-semibold text-accent"
-          >
-            Restart
-          </button>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
+  return null;
 }
 
 export function PwaProvider({ children }: { children: React.ReactNode }) {
@@ -69,7 +55,7 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
       options={{ scope: "/" }}
     >
       {children}
-      <UpdateToast />
+      <UpdateGate />
     </SerwistProvider>
   );
 }
