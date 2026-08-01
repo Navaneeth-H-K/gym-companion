@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { CloudOff, EllipsisVertical, Moon } from "lucide-react";
 import { ConfirmSheet } from "@/components/confirm-sheet";
 import { DayPickerSheet } from "@/components/day-picker-sheet";
+import { Onboarding } from "@/components/onboarding";
 import { Ring } from "@/components/ring";
 import { Sheet } from "@/components/sheet";
 import { StationPhoto } from "@/components/station-photo";
@@ -15,9 +16,9 @@ import { haptic } from "@/lib/haptics";
 import { humanDate, istToday } from "@/lib/ist";
 import { fadeUp, stagger } from "@/lib/motion";
 import { PROGRAM, type DayKey } from "@/lib/program";
-import { discardSession, resumeOrStart } from "@/lib/repo";
+import { discardSession, resumeOrStart, saveSettings } from "@/lib/repo";
 import { todaysPlan } from "@/lib/schedule";
-import { activeSession, allOverrides, doneDays, sessionSets } from "@/lib/selectors";
+import { activeSession, allOverrides, doneDays, sessionSets, settings } from "@/lib/selectors";
 import { resolveExercise } from "@/lib/stations";
 import { computeStreak } from "@/lib/streak";
 
@@ -59,6 +60,7 @@ export default function TodayPage() {
     [active?.id],
   );
   const overrides = useLiveQuery(allOverrides, []);
+  const settingsRow = useLiveQuery(settings, []);
 
   const [pickerOpen, setPickerOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
@@ -250,6 +252,10 @@ export default function TodayPage() {
           if (active) void discardSession(active.id);
         }}
       />
+
+      {settingsRow && !settingsRow.onboarded && (
+        <Onboarding onDone={() => void saveSettings({ onboarded: true })} />
+      )}
 
       <Sheet open={infoOpen} onClose={() => setInfoOpen(false)} title="How the streak works">
         <div className="flex flex-col gap-3 text-[15px] leading-[22px] text-fg-muted">
