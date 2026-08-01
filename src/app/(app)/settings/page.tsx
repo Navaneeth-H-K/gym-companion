@@ -79,7 +79,7 @@ export default function SettingsPage() {
       <Section title="training">
         <Row
           label="Schedule"
-          hint="Rolling cycle — each session suggests the next, no weekday anchoring. Rest is offered after Legs #2."
+          hint="Six sessions in a rolling cycle — each one suggests the next, so a missed day never drops a session. Sunday is the rest day; training anyway is always one tap away."
         />
         <Row label="Units" hint="Kilograms, like the plates.">
           <span className="tnum text-[15px] text-fg-muted">kg</span>

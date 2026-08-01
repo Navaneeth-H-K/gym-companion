@@ -166,10 +166,10 @@ export default function TodayPage() {
               <span className="overline-label text-accent-2">Rest day</span>
             </div>
             <h1 className="mt-1 font-display text-[30px] font-semibold leading-[34px]">
-              You&apos;ve earned it
+              Sunday. Go eat.
             </h1>
             <p className="mt-2 text-[15px] leading-[22px] text-fg-muted">
-              Cycle complete. Tomorrow: {day.title} — {day.focusLabel}.
+              Next up tomorrow: {day.title} — {day.focusLabel}.
             </p>
             <button
               onClick={() => setPickerOpen(true)}
@@ -261,9 +261,10 @@ export default function TodayPage() {
             and it resets for the next round.
           </p>
           <p>
-            The streak counts training days. One rest day in any rolling 7 is free (that&apos;s the
-            program). A second rest day auto-spends a freeze <span className="text-accent-2">❄</span>;
-            without one, the streak resets.
+            The streak counts training days. One rest day in any rolling 7 is free — normally
+            Sunday, but the streak doesn&apos;t care which day you take. A second rest day in the
+            same week auto-spends a freeze <span className="text-accent-2">❄</span>; without one,
+            the streak resets.
           </p>
           <p>Earn a freeze each time you complete 6 sessions within 7 days. You can hold two.</p>
         </div>

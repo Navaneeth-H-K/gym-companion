@@ -21,7 +21,7 @@ export default function PlanPage() {
         Plan
       </motion.h1>
       <motion.p variants={fadeUp} className="mt-1 text-[13px] text-fg-muted">
-        Push/Pull/Legs × 2 · six sessions per cycle, rest when the cycle closes
+        Push/Pull/Legs × 2 · six sessions Mon–Sat, Sunday off
       </motion.p>
 
       <motion.div variants={fadeUp} className="mt-5 flex flex-col gap-3">
@@ -62,7 +62,7 @@ export default function PlanPage() {
         <div className="flex h-12 items-center gap-3 px-4">
           <Moon size={16} className="text-fg-faint" />
           <span className="text-[13px] text-fg-faint">
-            Day 7 — rest. The ring never asks for it.
+            Sunday — rest. Shift it to another day and the streak won&apos;t mind.
           </span>
         </div>
       </motion.div>

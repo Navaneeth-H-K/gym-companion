@@ -88,8 +88,8 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
             </h1>
             <div className="mt-4 flex flex-col gap-3 text-[15px] leading-[22px] text-fg-muted">
               <p>
-                Push, Pull, Legs — twice each, in order, on whatever days life allows. Finish all
-                six and the cycle resets. Rest never breaks anything.
+                Push, Pull, Legs — twice each, Monday to Saturday, with Sunday off. Miss a day and
+                nothing is lost: the cycle just picks up where you left it.
               </p>
               <p>
                 <span className="font-semibold text-fg">Enter weights as you go</span> — the first
