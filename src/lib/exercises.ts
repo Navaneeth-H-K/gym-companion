@@ -53,7 +53,7 @@ export type ExerciseInfo = {
   setup?: string;
 };
 
-export const EXERCISES = {
+const CATALOG = {
   /* ---------------------------------------------------------------- push */
   "machine-chest-press": {
     name: "Machine Chest Press",
@@ -686,7 +686,10 @@ export const EXERCISES = {
   },
 } as const satisfies Record<string, ExerciseInfo>;
 
-export type ExerciseId = keyof typeof EXERCISES;
+export type ExerciseId = keyof typeof CATALOG;
+
+/** Widened view — optional fields (cues/setup/unitLabel) stay accessible. */
+export const EXERCISES: Record<ExerciseId, ExerciseInfo> = CATALOG;
 
 export function exercise(id: ExerciseId): ExerciseInfo {
   return EXERCISES[id];
