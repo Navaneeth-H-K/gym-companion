@@ -109,6 +109,7 @@ export default function TodayPage() {
   }
 
   return (
+    <>
     <motion.div variants={stagger} initial="hidden" animate="show" className="px-5 pt-4 safe-top">
       {/* status row */}
       <motion.div variants={fadeUp} className="flex h-8 items-center justify-between">
@@ -253,10 +254,6 @@ export default function TodayPage() {
         }}
       />
 
-      {settingsRow && !settingsRow.onboarded && (
-        <Onboarding onDone={() => void saveSettings({ onboarded: true })} />
-      )}
-
       <Sheet open={infoOpen} onClose={() => setInfoOpen(false)} title="How the streak works">
         <div className="flex flex-col gap-3 text-[15px] leading-[22px] text-fg-muted">
           <p>
@@ -272,5 +269,10 @@ export default function TodayPage() {
         </div>
       </Sheet>
     </motion.div>
+
+    {settingsRow && !settingsRow.onboarded && (
+      <Onboarding onDone={() => void saveSettings({ onboarded: true })} />
+    )}
+    </>
   );
 }
