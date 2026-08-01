@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { PwaProvider } from "@/components/pwa-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -44,7 +45,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <PwaProvider>{children}</PwaProvider>
+      </body>
     </html>
   );
 }
