@@ -378,6 +378,7 @@ export default function WorkoutPage() {
         {day.slots.map((slot) => (
           <ExerciseCard
             key={slot.slot}
+            sessionId={session.id}
             slot={slot}
             index={slot.slot}
             expanded={slot.slot === expandedSlot}
@@ -537,7 +538,7 @@ export default function WorkoutPage() {
         }}
       />
 
-      <Toast toast={toast} onDismiss={() => setToast(null)} />
+      <Toast toast={toast} onDismiss={() => setToast(null)} anchor="top" />
 
       {summary && (
         <FinishSummary

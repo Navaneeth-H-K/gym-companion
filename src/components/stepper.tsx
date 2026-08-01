@@ -60,13 +60,15 @@ export function Stepper({
   const dec = useAutoRepeat(onDecrement);
   const inc = useAutoRepeat(onIncrement);
   const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState("");
   const [shake, setShake] = useState(0);
 
-  const commit = () => {
+  // Read the raw value off the element rather than mirroring it in state —
+  // a blur in the same tick as the last keystroke would commit a stale draft.
+  const commit = (raw: string) => {
     setEditing(false);
-    if (draft.trim() === "") return;
-    const ok = onDirectEntry(draft.trim().replace(",", "."));
+    const trimmed = raw.trim();
+    if (trimmed === "") return;
+    const ok = onDirectEntry(trimmed.replace(",", "."));
     if (!ok) {
       haptic("error");
       setShake((s) => s + 1);
@@ -95,8 +97,7 @@ export function Stepper({
             autoFocus
             inputMode={inputMode}
             defaultValue={value}
-            onChange={(e) => setDraft(e.target.value)}
-            onBlur={commit}
+            onBlur={(e) => commit(e.currentTarget.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") (e.target as HTMLInputElement).blur();
             }}
@@ -108,7 +109,6 @@ export function Stepper({
             className="w-full text-center"
             onClick={() => {
               if (disabled) return;
-              setDraft(value);
               setEditing(true);
             }}
           >

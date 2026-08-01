@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { springSheet } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 export type ToastData = {
   id: number;
@@ -11,8 +12,20 @@ export type ToastData = {
   onAction?: () => void;
 };
 
-/** Single pill toast above the dock; swipe down or 5s auto-dismiss. */
-export function Toast({ toast, onDismiss }: { toast: ToastData | null; onDismiss: () => void }) {
+/**
+ * Single pill toast; swipe away or 5s auto-dismiss. Anchors to the top in
+ * workout mode so it never covers the Log button.
+ */
+export function Toast({
+  toast,
+  onDismiss,
+  anchor = "bottom",
+}: {
+  toast: ToastData | null;
+  onDismiss: () => void;
+  anchor?: "top" | "bottom";
+}) {
+  const fromTop = anchor === "top";
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(onDismiss, 5000);
@@ -24,16 +37,21 @@ export function Toast({ toast, onDismiss }: { toast: ToastData | null; onDismiss
       {toast && (
         <motion.div
           key={toast.id}
-          initial={{ y: 24, opacity: 0 }}
+          initial={{ y: fromTop ? -24 : 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1, transition: springSheet }}
-          exit={{ y: 24, opacity: 0, transition: { duration: 0.14 } }}
+          exit={{ y: fromTop ? -24 : 24, opacity: 0, transition: { duration: 0.14 } }}
           drag="y"
           dragConstraints={{ top: 0, bottom: 0 }}
-          dragElastic={{ top: 0, bottom: 0.8 }}
+          dragElastic={fromTop ? { top: 0.8, bottom: 0 } : { top: 0, bottom: 0.8 }}
           onDragEnd={(_, info) => {
-            if (info.offset.y > 24 || info.velocity.y > 500) onDismiss();
+            const away = fromTop ? -info.offset.y : info.offset.y;
+            const fling = fromTop ? -info.velocity.y : info.velocity.y;
+            if (away > 24 || fling > 500) onDismiss();
           }}
-          className="fixed inset-x-5 bottom-28 z-40 mx-auto flex h-12 max-w-md items-center justify-between rounded-full bg-bg-3 px-5 shadow-[0_0_0_1px_var(--color-line)]"
+          className={cn(
+            "fixed inset-x-5 z-40 mx-auto flex h-12 max-w-md items-center justify-between rounded-full bg-bg-3 px-5 shadow-[0_0_0_1px_var(--color-line)]",
+            fromTop ? "top-[72px]" : "bottom-28",
+          )}
         >
           <span className="truncate text-[13px] font-medium">{toast.message}</span>
           {toast.actionLabel && (

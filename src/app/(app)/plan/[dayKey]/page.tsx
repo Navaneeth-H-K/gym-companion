@@ -40,6 +40,7 @@ export default function PlanDayPage() {
   };
 
   return (
+    <>
     <motion.div variants={stagger} initial="hidden" animate="show" className="pt-2 safe-top">
       {/* sticky mini header */}
       <div className="sticky top-0 z-20 flex h-14 items-center gap-2 bg-bg px-3">
@@ -156,20 +157,22 @@ export default function PlanDayPage() {
           ≈ {workingSetCount(day)} working sets · est {day.estMinutes.min}–{day.estMinutes.max} min
         </motion.p>
       </div>
-
-      {editingSlot != null && (
-        <OverrideSheet
-          open
-          onClose={() => setEditingSlot(null)}
-          slot={day.slots[editingSlot]}
-          currentPerformAs={
-            resolveExercise(
-              day.slots[editingSlot].exerciseId,
-              overrides.find((o) => o.exerciseId === day.slots[editingSlot].exerciseId),
-            ).performAs
-          }
-        />
-      )}
     </motion.div>
+
+    {/* Outside the staggered content — see the note in today/page.tsx. */}
+    {editingSlot != null && (
+      <OverrideSheet
+        open
+        onClose={() => setEditingSlot(null)}
+        slot={day.slots[editingSlot]}
+        currentPerformAs={
+          resolveExercise(
+            day.slots[editingSlot].exerciseId,
+            overrides.find((o) => o.exerciseId === day.slots[editingSlot].exerciseId),
+          ).performAs
+        }
+      />
+    )}
+    </>
   );
 }

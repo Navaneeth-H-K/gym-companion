@@ -231,45 +231,49 @@ export default function TodayPage() {
         />
       </motion.div>
 
-      <DayPickerSheet
-        open={pickerOpen}
-        onClose={() => setPickerOpen(false)}
-        cycleDone={streak.cycleDone}
-        suggested={plan.dayKey}
-        onPick={(dayKey) => {
-          setPickerOpen(false);
-          void start(dayKey);
-        }}
-      />
-
-      <ConfirmSheet
-        open={discardOpen}
-        onClose={() => setDiscardOpen(false)}
-        title="Discard this workout?"
-        body="Its logged sets are deleted — as if it never happened. This can't be undone."
-        confirmLabel="Discard workout"
-        onConfirm={() => {
-          setDiscardOpen(false);
-          if (active) void discardSession(active.id);
-        }}
-      />
-
-      <Sheet open={infoOpen} onClose={() => setInfoOpen(false)} title="How the streak works">
-        <div className="flex flex-col gap-3 text-[15px] leading-[22px] text-fg-muted">
-          <p>
-            The ring is your current cycle — six sessions, in any order, on any days. Finish all six
-            and it resets for the next round.
-          </p>
-          <p>
-            The streak counts training days. One rest day in any rolling 7 is free — normally
-            Sunday, but the streak doesn&apos;t care which day you take. A second rest day in the
-            same week auto-spends a freeze <span className="text-accent-2">❄</span>; without one,
-            the streak resets.
-          </p>
-          <p>Earn a freeze each time you complete 6 sessions within 7 days. You can hold two.</p>
-        </div>
-      </Sheet>
     </motion.div>
+
+    {/* Overlays live outside the staggered content: Motion propagates a
+        parent's variant labels to every descendant, which overrides an
+        overlay's own open/close animation and freezes it mid-state. */}
+    <DayPickerSheet
+      open={pickerOpen}
+      onClose={() => setPickerOpen(false)}
+      cycleDone={streak.cycleDone}
+      suggested={plan.dayKey}
+      onPick={(dayKey) => {
+        setPickerOpen(false);
+        void start(dayKey);
+      }}
+    />
+
+    <ConfirmSheet
+      open={discardOpen}
+      onClose={() => setDiscardOpen(false)}
+      title="Discard this workout?"
+      body="Its logged sets are deleted — as if it never happened. This can't be undone."
+      confirmLabel="Discard workout"
+      onConfirm={() => {
+        setDiscardOpen(false);
+        if (active) void discardSession(active.id);
+      }}
+    />
+
+    <Sheet open={infoOpen} onClose={() => setInfoOpen(false)} title="How the streak works">
+      <div className="flex flex-col gap-3 text-[15px] leading-[22px] text-fg-muted">
+        <p>
+          The ring is your current cycle — six sessions, in any order, on any days. Finish all six
+          and it resets for the next round.
+        </p>
+        <p>
+          The streak counts training days. One rest day in any rolling 7 is free — normally Sunday,
+          but the streak doesn&apos;t care which day you take. A second rest day in the same week
+          auto-spends a freeze <span className="text-accent-2">❄</span>; without one, the streak
+          resets.
+        </p>
+        <p>Earn a freeze each time you complete 6 sessions within 7 days. You can hold two.</p>
+      </div>
+    </Sheet>
 
     {settingsRow && !settingsRow.onboarded && (
       <Onboarding onDone={() => void saveSettings({ onboarded: true })} />

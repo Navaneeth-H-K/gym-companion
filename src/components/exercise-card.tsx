@@ -49,6 +49,7 @@ function fmtW(w: number | null): string {
  * active editor.
  */
 export function ExerciseCard({
+  sessionId,
   slot,
   index,
   expanded,
@@ -70,6 +71,7 @@ export function ExerciseCard({
   onBusy,
   onDetail,
 }: {
+  sessionId: string;
   slot: ProgramSlot;
   index: number;
   expanded: boolean;
@@ -93,7 +95,13 @@ export function ExerciseCard({
 }) {
   const info = EXERCISES[resolved.performAs];
   const profile = profileFor(info.equipment, info.loadType, incrementSettings);
+  // Prefill carries forward within the session (set 2 inherits set 1), while
+  // the "Last:" line only ever describes a previous session.
   const lastSets = useMemo(() => lastSessionWorkingSets(history), [history]);
+  const priorSets = useMemo(
+    () => lastSessionWorkingSets(history.filter((h) => h.sessionId !== sessionId)),
+    [history, sessionId],
+  );
   const done = working.length >= slot.workingSets;
   const nextIndex = working.length;
   const [warmupOpen, setWarmupOpen] = useState(false);
@@ -103,7 +111,7 @@ export function ExerciseCard({
   const ladderBase = liveWeight ?? firstPrefill.weightKg;
   const wuCount = warmupCount(slot.warmupSets, isFirstLift);
   const ladder = warmupLadder(ladderBase, wuCount, profile);
-  const lastLine = lastTimeSummary(lastSets);
+  const lastLine = lastTimeSummary(priorSets);
 
   /* ---------------------------------------------------- collapsed row */
   if (!expanded) {
