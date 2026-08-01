@@ -50,17 +50,17 @@ export function Toast({
           }}
           className={cn(
             "fixed inset-x-5 z-40 mx-auto flex h-12 max-w-md items-center justify-between rounded-full bg-bg-3 px-5 shadow-[0_0_0_1px_var(--color-line)]",
-            fromTop ? "top-[72px]" : "bottom-28",
+            fromTop ? "top-[4.5rem]" : "bottom-28",
           )}
         >
-          <span className="truncate text-[13px] font-medium">{toast.message}</span>
+          <span className="truncate text-[0.8125rem] font-medium">{toast.message}</span>
           {toast.actionLabel && (
             <button
               onClick={() => {
                 toast.onAction?.();
                 onDismiss();
               }}
-              className="ml-3 shrink-0 text-[13px] font-semibold text-accent"
+              className="ml-3 shrink-0 text-[0.8125rem] font-semibold text-accent"
             >
               {toast.actionLabel}
             </button>

@@ -35,26 +35,26 @@ export function DayPickerSheet({
                 onPick(dayKey);
               }}
               className={cn(
-                "flex h-16 items-center gap-3 rounded-[16px] bg-bg-2 px-4 text-left",
+                "flex h-16 items-center gap-3 rounded-[1rem] bg-bg-2 px-4 text-left",
                 isSuggested && "border border-accent/40",
               )}
             >
               <span className="overline-label w-7 text-fg-faint tnum">{String(i + 1).padStart(2, "0")}</span>
               <span className="flex-1">
-                <span className="block text-[15px] font-semibold">{day.title}</span>
-                <span className="block text-[13px] leading-[18px] text-fg-muted">
+                <span className="block text-[0.9375rem] font-semibold">{day.title}</span>
+                <span className="block text-[0.8125rem] leading-[1.125rem] text-fg-muted">
                   {day.slots.length} exercises · {workingSetCount(day)} working sets
                 </span>
               </span>
               {isSuggested && !done && (
-                <span className="overline-label rounded-[8px] bg-accent-dim px-2 py-1 text-accent">next</span>
+                <span className="overline-label rounded-[0.5rem] bg-accent-dim px-2 py-1 text-accent">next</span>
               )}
-              {done && <Check size={18} className="text-accent" />}
+              {done && <Check size="1.125rem" className="text-accent" />}
             </button>
           );
         })}
       </div>
-      <p className="mt-3 text-[13px] leading-[18px] text-fg-faint">
+      <p className="mt-3 text-[0.8125rem] leading-[1.125rem] text-fg-faint">
         The cycle just continues from whatever you pick — nothing is ever marked missed.
       </p>
     </Sheet>

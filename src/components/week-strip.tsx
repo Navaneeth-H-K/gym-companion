@@ -36,11 +36,11 @@ export function WeekStrip({
               )}
             >
               {trained ? (
-                <Check size={16} className="text-accent-ink" strokeWidth={3} />
+                <Check size="1rem" className="text-accent-ink" strokeWidth={3} />
               ) : frozen ? (
-                <Snowflake size={14} className="text-accent-2" />
+                <Snowflake size="0.875rem" className="text-accent-2" />
               ) : (
-                <span className={cn("text-[11px] font-medium", isToday ? "text-accent" : "text-fg-faint")}>
+                <span className={cn("text-[0.6875rem] font-medium", isToday ? "text-accent" : "text-fg-faint")}>
                   {DAY_LETTERS[weekdayOf(dateKey)]}
                 </span>
               )}

@@ -49,15 +49,15 @@ export default function PlanDayPage() {
           onClick={() => router.push("/plan")}
           className="flex h-11 w-11 items-center justify-center text-fg-muted"
         >
-          <ChevronLeft size={22} />
+          <ChevronLeft size="1.375rem" />
         </button>
         <div className="min-w-0 flex-1">
-          <div className="truncate text-[17px] font-semibold">{day.title}</div>
+          <div className="truncate text-[1.0625rem] font-semibold">{day.title}</div>
           <div className="overline-label text-fg-faint">{day.focusLabel}</div>
         </div>
         <button
           onClick={() => void start()}
-          className="h-11 rounded-[12px] bg-accent px-4 text-[15px] font-semibold text-accent-ink"
+          className="h-11 rounded-[0.75rem] bg-accent px-4 text-[0.9375rem] font-semibold text-accent-ink"
         >
           Start
         </button>
@@ -65,9 +65,9 @@ export default function PlanDayPage() {
 
       <div className="flex flex-col gap-3 px-5 pt-2">
         {/* general warm-up banner */}
-        <motion.div variants={fadeUp} className="flex items-start gap-2 rounded-[16px] bg-accent-2-dim p-3">
-          <Wind size={16} className="mt-0.5 shrink-0 text-accent-2" />
-          <p className="text-[13px] leading-[18px] text-fg-muted">{GENERAL_WARMUP}</p>
+        <motion.div variants={fadeUp} className="flex items-start gap-2 rounded-[1rem] bg-accent-2-dim p-3">
+          <Wind size="1rem" className="mt-0.5 shrink-0 text-accent-2" />
+          <p className="text-[0.8125rem] leading-[1.125rem] text-fg-muted">{GENERAL_WARMUP}</p>
         </motion.div>
 
         {day.slots.map((slot) => {
@@ -78,22 +78,22 @@ export default function PlanDayPage() {
           const differs = resolved.performAs !== slot.exerciseId;
 
           return (
-            <motion.div key={slot.slot} variants={fadeUp} className="rounded-[24px] bg-bg-1 p-4">
+            <motion.div key={slot.slot} variants={fadeUp} className="rounded-[1.5rem] bg-bg-1 p-4">
               {/* header */}
               <div className="flex items-center gap-3">
-                <span className="tnum flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-bg-2 text-[13px] text-fg-muted">
+                <span className="tnum flex h-7 w-7 shrink-0 items-center justify-center rounded-[0.5rem] bg-bg-2 text-[0.8125rem] text-fg-muted">
                   {slot.slot + 1}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[17px] font-semibold">{programInfo.name}</div>
+                  <div className="truncate text-[1.0625rem] font-semibold">{programInfo.name}</div>
                   <div className="mt-0.5 flex items-center gap-1.5">
                     <FloorChip station={resolved.station} />
-                    <span className="truncate text-[13px] text-fg-muted">
+                    <span className="truncate text-[0.8125rem] text-fg-muted">
                       {resolved.station?.name ?? "location unknown"}
                     </span>
                   </div>
                 </div>
-                <StationPhoto station={resolved.station} size={56} className="rounded-[12px]" />
+                <StationPhoto station={resolved.station} size={56} className="rounded-[0.75rem]" />
               </div>
 
               <div className="mt-3">
@@ -106,12 +106,12 @@ export default function PlanDayPage() {
                   const subResolved = resolveExercise(subId);
                   return (
                     <div key={subId} className="flex h-10 items-center gap-2">
-                      <ArrowLeftRight size={13} className="shrink-0 text-fg-faint" />
-                      <span className="min-w-0 flex-1 truncate text-[15px] text-fg-muted">
+                      <ArrowLeftRight size="0.8125rem" className="shrink-0 text-fg-faint" />
+                      <span className="min-w-0 flex-1 truncate text-[0.9375rem] text-fg-muted">
                         {EXERCISES[subId].name}
                       </span>
                       <FloorChip station={subResolved.station} />
-                      <span className="max-w-[120px] truncate text-[13px] text-fg-faint">
+                      <span className="max-w-[7.5rem] truncate text-[0.8125rem] text-fg-faint">
                         {subResolved.station?.name ?? "—"}
                       </span>
                     </div>
@@ -122,38 +122,38 @@ export default function PlanDayPage() {
               {/* house-version row */}
               {differs && (
                 <div className="mt-2 flex items-center gap-2 border-l-2 border-accent py-1 pl-3">
-                  <span className="min-w-0 flex-1 text-[13px] leading-[18px] text-fg-muted">
+                  <span className="min-w-0 flex-1 text-[0.8125rem] leading-[1.125rem] text-fg-muted">
                     At your gym: <span className="font-semibold text-fg">{performedInfo.name}</span>
                     {resolved.station ? ` — F${resolved.station.floor}, ${resolved.station.area}` : ""}
                   </span>
                   <button
                     onClick={() => setEditingSlot(slot.slot)}
-                    className="flex h-11 shrink-0 items-center gap-1 px-2 text-[13px] font-medium text-fg-muted"
+                    className="flex h-11 shrink-0 items-center gap-1 px-2 text-[0.8125rem] font-medium text-fg-muted"
                   >
-                    <Pencil size={12} /> Edit
+                    <Pencil size="0.75rem" /> Edit
                   </button>
                 </div>
               )}
               {!differs && (
                 <button
                   onClick={() => setEditingSlot(slot.slot)}
-                  className="mt-1 flex h-11 items-center gap-1 text-[13px] font-medium text-fg-faint"
+                  className="mt-1 flex h-11 items-center gap-1 text-[0.8125rem] font-medium text-fg-faint"
                 >
-                  <Pencil size={12} /> Change how you do this
+                  <Pencil size="0.75rem" /> Change how you do this
                 </button>
               )}
 
               {!resolved.station?.photo && (
                 <div className="mt-1 flex items-center gap-1.5 text-fg-faint">
-                  <Camera size={12} />
-                  <span className="overline-label text-[10px]">photo pending</span>
+                  <Camera size="0.75rem" />
+                  <span className="overline-label text-[0.625rem]">photo pending</span>
                 </div>
               )}
             </motion.div>
           );
         })}
 
-        <motion.p variants={fadeUp} className="tnum pb-4 text-center text-[13px] text-fg-faint">
+        <motion.p variants={fadeUp} className="tnum pb-4 text-center text-[0.8125rem] text-fg-faint">
           ≈ {workingSetCount(day)} working sets · est {day.estMinutes.min}–{day.estMinutes.max} min
         </motion.p>
       </div>

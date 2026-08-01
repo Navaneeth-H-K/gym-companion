@@ -26,11 +26,11 @@ export function PrescriptionStrip({ slot }: { slot: ProgramSlot }) {
   ];
 
   return (
-    <div className="grid grid-cols-4 divide-x divide-line rounded-[12px] border border-line">
+    <div className="grid grid-cols-4 divide-x divide-line rounded-[0.75rem] border border-line">
       {cells.map((c) => (
         <div key={c.label} className="flex flex-col items-center gap-1 px-1 py-2.5">
-          <span className="overline-label text-[10px] text-fg-faint">{c.label}</span>
-          <span className="tnum whitespace-nowrap text-[14px] font-medium leading-[18px]">
+          <span className="overline-label text-[0.625rem] text-fg-faint">{c.label}</span>
+          <span className="tnum whitespace-nowrap text-[0.875rem] font-medium leading-[1.125rem]">
             {c.value}
           </span>
         </div>

@@ -107,14 +107,14 @@ export function ActiveSetCard({
     <motion.div
       layout
       transition={springGentle}
-      className="rounded-[20px] border border-accent/25 bg-bg-2 p-4"
+      className="rounded-[1.25rem] border border-accent/25 bg-bg-2 p-4"
     >
       <div className="flex items-baseline justify-between">
         <span className="overline-label text-fg-muted">
           {mode === "edit" ? `edit set ${setIndex + 1}` : `set ${setIndex + 1} of ${slot.workingSets}`}
           {isLastSet && mode === "log" ? " · last" : ""}
         </span>
-        <span className="tnum text-[13px] text-fg-faint">
+        <span className="tnum text-[0.8125rem] text-fg-faint">
           target {slot.reps.min}–{slot.reps.max} reps
         </span>
       </div>
@@ -132,7 +132,7 @@ export function ActiveSetCard({
           />
         )}
         {firstEver && (
-          <p className="text-[13px] leading-[18px] text-fg-faint">
+          <p className="text-[0.8125rem] leading-[1.125rem] text-fg-faint">
             First time — start light, around RPE 6–7. Tap the number to type a weight.
           </p>
         )}
@@ -159,7 +159,7 @@ export function ActiveSetCard({
           disabled={!canCommit}
           onClick={() => onLog?.(draft)}
           className={cn(
-            "tnum mt-4 h-[60px] w-full rounded-[16px] bg-accent text-[16px] font-semibold text-accent-ink",
+            "tnum mt-4 h-[3.75rem] w-full rounded-[1rem] bg-accent text-[1rem] font-semibold text-accent-ink",
             !canCommit && "opacity-40",
           )}
         >
@@ -173,15 +173,15 @@ export function ActiveSetCard({
               onDelete?.();
             }}
             aria-label="Delete set"
-            className="flex h-14 w-14 items-center justify-center rounded-[16px] border border-danger/40 text-danger"
+            className="flex h-14 w-14 items-center justify-center rounded-[1rem] border border-danger/40 text-danger"
           >
-            <Trash2 size={18} />
+            <Trash2 size="1.125rem" />
           </button>
           <button
             disabled={!canCommit}
             onClick={() => onSave?.(draft)}
             className={cn(
-              "tnum h-14 flex-1 rounded-[16px] bg-accent text-[15px] font-semibold text-accent-ink",
+              "tnum h-14 flex-1 rounded-[1rem] bg-accent text-[0.9375rem] font-semibold text-accent-ink",
               !canCommit && "opacity-40",
             )}
           >

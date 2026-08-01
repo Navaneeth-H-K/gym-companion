@@ -50,12 +50,12 @@
   --color-rpe-95: #ff6b4e;
   --color-rpe-10: #ff4d5e;
 
-  /* Radii */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  /* Radii — rem so they scale with the fluid root size */
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
 
   /* Type */
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
@@ -76,7 +76,15 @@
     min-width: 0;
   }
 
+  /**
+   * Fluid root size — the whole UI is authored in rem against a 375px
+   * reference (16px base), so every dimension scales with the phone's
+   * width instead of leaving dead margin on a bigger screen.
+   * 4.2667vw = 16/375. Clamped so tiny phones stay legible and tablets
+   * or desktop don't inflate into a comedy poster.
+   */
   html {
+    font-size: clamp(14px, 4.2667vw, 19px);
     -webkit-text-size-adjust: 100%;
   }
 
@@ -135,8 +143,8 @@
   /* Uppercase mono kicker — "TODAY · PUSH #1", field labels. */
   .overline-label {
     font-family: var(--font-mono);
-    font-size: 11px;
-    line-height: 14px;
+    font-size: 0.6875rem;
+    line-height: 0.875rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }

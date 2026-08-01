@@ -159,9 +159,9 @@ export default function WorkoutPage() {
   if (!session || !day || sets === undefined) {
     return (
       <div className="px-5 pt-6 safe-top">
-        <div className="skeleton h-10 w-full rounded-[12px]" />
-        <div className="skeleton mt-4 h-64 w-full rounded-[24px]" />
-        <div className="skeleton mt-3 h-14 w-full rounded-[16px]" />
+        <div className="skeleton h-10 w-full rounded-[0.75rem]" />
+        <div className="skeleton mt-4 h-64 w-full rounded-[1.5rem]" />
+        <div className="skeleton mt-3 h-14 w-full rounded-[1rem]" />
       </div>
     );
   }
@@ -297,11 +297,11 @@ export default function WorkoutPage() {
             onClick={handleClose}
             className="flex h-11 w-11 items-center justify-center text-fg-muted"
           >
-            <X size={20} />
+            <X size="1.25rem" />
           </button>
           <div className="text-center">
             <div className="overline-label text-fg-muted">{day.title}</div>
-            <div className="tnum text-[11px] leading-[14px] text-fg-faint">
+            <div className="tnum text-[0.6875rem] leading-[0.875rem] text-fg-faint">
               Set {workingLogged}/{totalWorking}
             </div>
           </div>
@@ -311,9 +311,9 @@ export default function WorkoutPage() {
               title={wake.held ? "Screen staying awake" : "Screen may sleep"}
             >
               {wake.held ? (
-                <Zap size={14} className="text-accent-2" />
+                <Zap size="0.875rem" className="text-accent-2" />
               ) : (
-                <ZapOff size={14} className="text-fg-faint" />
+                <ZapOff size="0.875rem" className="text-fg-faint" />
               )}
             </span>
             <button
@@ -321,7 +321,7 @@ export default function WorkoutPage() {
               onClick={() => setMenuOpen(true)}
               className="flex h-11 w-11 items-center justify-center text-fg-muted"
             >
-              <EllipsisVertical size={20} />
+              <EllipsisVertical size="1.25rem" />
             </button>
           </div>
         </div>
@@ -359,16 +359,16 @@ export default function WorkoutPage() {
         {!session.warmupDone && (
           <motion.div
             layout
-            className="rounded-[20px] border border-accent-2/25 bg-accent-2-dim p-4"
+            className="rounded-[1.25rem] border border-accent-2/25 bg-accent-2-dim p-4"
           >
             <div className="flex items-center gap-2">
-              <Wind size={16} className="text-accent-2" />
+              <Wind size="1rem" className="text-accent-2" />
               <span className="overline-label text-accent-2">general warm-up</span>
             </div>
-            <p className="mt-2 text-[15px] leading-[22px] text-fg-muted">{GENERAL_WARMUP}</p>
+            <p className="mt-2 text-[0.9375rem] leading-[1.375rem] text-fg-muted">{GENERAL_WARMUP}</p>
             <button
               onClick={() => void setWarmupDone(session.id, true)}
-              className="mt-3 h-11 w-full rounded-[12px] bg-bg-2 text-[15px] font-semibold text-accent-2"
+              className="mt-3 h-11 w-full rounded-[0.75rem] bg-bg-2 text-[0.9375rem] font-semibold text-accent-2"
             >
               Done
             </button>
@@ -422,7 +422,7 @@ export default function WorkoutPage() {
           >
             <button
               onClick={() => void doFinish()}
-              className="h-[60px] w-full rounded-[16px] bg-accent text-[16px] font-semibold text-accent-ink"
+              className="h-[3.75rem] w-full rounded-[1rem] bg-accent text-[1rem] font-semibold text-accent-ink"
             >
               Finish workout
             </button>
@@ -471,7 +471,7 @@ export default function WorkoutPage() {
               if (allDone) void doFinish();
               else setFinishEarlyOpen(true);
             }}
-            className="h-14 rounded-[16px] bg-bg-2 text-[15px] font-semibold"
+            className="h-14 rounded-[1rem] bg-bg-2 text-[0.9375rem] font-semibold"
           >
             Finish {allDone ? "workout" : "early"}
           </button>
@@ -480,7 +480,7 @@ export default function WorkoutPage() {
               setMenuOpen(false);
               setDiscardOpen(true);
             }}
-            className="h-14 rounded-[16px] bg-bg-2 text-[15px] font-semibold text-danger"
+            className="h-14 rounded-[1rem] bg-bg-2 text-[0.9375rem] font-semibold text-danger"
           >
             Discard workout
           </button>
@@ -488,7 +488,7 @@ export default function WorkoutPage() {
       </Sheet>
 
       <Sheet open={finishEarlyOpen} onClose={() => setFinishEarlyOpen(false)} title="Finish early?">
-        <p className="mb-4 text-[15px] leading-[22px] text-fg-muted">
+        <p className="mb-4 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
           {totalWorking - workingLogged} working sets unlogged. The session saves as-is and still
           counts for the streak.
         </p>
@@ -497,20 +497,20 @@ export default function WorkoutPage() {
             setFinishEarlyOpen(false);
             void doFinish();
           }}
-          className="h-14 w-full rounded-[16px] bg-accent text-[15px] font-semibold text-accent-ink"
+          className="h-14 w-full rounded-[1rem] bg-accent text-[0.9375rem] font-semibold text-accent-ink"
         >
           Finish &amp; save
         </button>
       </Sheet>
 
       <Sheet open={closeOpen} onClose={() => setCloseOpen(false)} title="Pause workout?">
-        <p className="mb-4 text-[15px] leading-[22px] text-fg-muted">
+        <p className="mb-4 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
           Progress is saved — resume from Today whenever.
         </p>
         <div className="flex flex-col gap-2">
           <button
             onClick={() => router.replace("/today")}
-            className="h-14 rounded-[16px] bg-accent text-[15px] font-semibold text-accent-ink"
+            className="h-14 rounded-[1rem] bg-accent text-[0.9375rem] font-semibold text-accent-ink"
           >
             Pause &amp; leave
           </button>
@@ -519,7 +519,7 @@ export default function WorkoutPage() {
               setCloseOpen(false);
               setDiscardOpen(true);
             }}
-            className="h-14 rounded-[16px] bg-bg-2 text-[15px] font-semibold text-danger"
+            className="h-14 rounded-[1rem] bg-bg-2 text-[0.9375rem] font-semibold text-danger"
           >
             Discard workout
           </button>

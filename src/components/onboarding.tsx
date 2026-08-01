@@ -68,7 +68,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
       className="fixed inset-0 z-50 mx-auto flex w-full max-w-md flex-col bg-bg px-6 safe-top"
     >
       <div className="flex h-12 items-center justify-end">
-        <button onClick={finish} className="h-11 px-2 text-[13px] font-medium text-fg-faint">
+        <button onClick={finish} className="h-11 px-2 text-[0.8125rem] font-medium text-fg-faint">
           Skip
         </button>
       </div>
@@ -82,11 +82,11 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
       >
         {step === 0 ? (
           <>
-            <Flame size={32} className="text-accent" />
-            <h1 className="mt-4 font-display text-[30px] font-semibold leading-[36px]">
+            <Flame size="2rem" className="text-accent" />
+            <h1 className="mt-4 font-display text-[1.875rem] font-semibold leading-[2.25rem]">
               Six sessions fill the ring.
             </h1>
-            <div className="mt-4 flex flex-col gap-3 text-[15px] leading-[22px] text-fg-muted">
+            <div className="mt-4 flex flex-col gap-3 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
               <p>
                 Push, Pull, Legs — twice each, Monday to Saturday, with Sunday off. Miss a day and
                 nothing is lost: the cycle just picks up where you left it.
@@ -98,36 +98,36 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
                 weight.
               </p>
               <p className="flex items-center gap-2">
-                <Snowflake size={16} className="shrink-0 text-accent-2" />
+                <Snowflake size="1rem" className="shrink-0 text-accent-2" />
                 <span>Perfect cycles earn streak freezes for the days that go sideways.</span>
               </p>
             </div>
           </>
         ) : (
           <>
-            <MonitorSmartphone size={32} className="text-accent" />
-            <h1 className="mt-4 font-display text-[30px] font-semibold leading-[36px]">
+            <MonitorSmartphone size="2rem" className="text-accent" />
+            <h1 className="mt-4 font-display text-[1.875rem] font-semibold leading-[2.25rem]">
               Put it on your home screen.
             </h1>
             {standalone ? (
-              <p className="mt-4 flex items-center gap-2 text-[15px] leading-[22px] text-fg-muted">
-                <CircleCheck size={18} className="shrink-0 text-accent" /> Already installed — you&apos;re
+              <p className="mt-4 flex items-center gap-2 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
+                <CircleCheck size="1.125rem" className="shrink-0 text-accent" /> Already installed — you&apos;re
                 set.
               </p>
             ) : installPrompt ? (
               <>
-                <p className="mt-4 text-[15px] leading-[22px] text-fg-muted">
+                <p className="mt-4 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
                   Full-screen, offline in the gym basement, opens like any app.
                 </p>
                 <button
                   onClick={() => void installPrompt.prompt()}
-                  className="mt-6 h-14 w-full rounded-[16px] bg-accent text-[16px] font-semibold text-accent-ink"
+                  className="mt-6 h-14 w-full rounded-[1rem] bg-accent text-[1rem] font-semibold text-accent-ink"
                 >
                   Add to Home Screen
                 </button>
               </>
             ) : (
-              <div className="mt-4 flex flex-col gap-2 text-[15px] leading-[22px] text-fg-muted">
+              <div className="mt-4 flex flex-col gap-2 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
                 <p>Full-screen, offline in the gym basement, opens like any app:</p>
                 <p>
                   1. Tap Chrome&apos;s <span className="font-semibold text-fg">⋮</span> menu
@@ -156,7 +156,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
             if (step === 0) setStep(1);
             else finish();
           }}
-          className="h-14 w-full rounded-[16px] bg-accent text-[16px] font-semibold text-accent-ink"
+          className="h-14 w-full rounded-[1rem] bg-accent text-[1rem] font-semibold text-accent-ink"
         >
           {step === 0 ? "Next" : "Let's lift"}
         </button>

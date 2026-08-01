@@ -48,10 +48,10 @@ function UpdateToast() {
           exit={{ y: -48, opacity: 0, transition: { duration: 0.14 } }}
           className="fixed inset-x-5 top-3 z-[70] mx-auto flex h-12 max-w-md items-center justify-between rounded-full bg-bg-3 px-5 shadow-[0_0_0_1px_var(--color-line)] safe-top"
         >
-          <span className="text-[13px] font-medium">Update ready</span>
+          <span className="text-[0.8125rem] font-medium">Update ready</span>
           <button
             onClick={() => serwist?.messageSkipWaiting()}
-            className="text-[13px] font-semibold text-accent"
+            className="text-[0.8125rem] font-semibold text-accent"
           >
             Restart
           </button>

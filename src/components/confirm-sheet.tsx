@@ -23,7 +23,7 @@ function ArmedDangerButton({ label, onPress }: { label: string; onPress: () => v
         onPress();
       }}
       className={cn(
-        "h-14 rounded-[16px] bg-danger text-[15px] font-semibold text-bg transition-opacity",
+        "h-14 rounded-[1rem] bg-danger text-[0.9375rem] font-semibold text-bg transition-opacity",
         !armed && "opacity-40",
       )}
     >
@@ -50,10 +50,10 @@ export function ConfirmSheet({
 }) {
   return (
     <Sheet open={open} onClose={onClose} title={title}>
-      {body && <p className="mb-4 text-[15px] leading-[22px] text-fg-muted">{body}</p>}
+      {body && <p className="mb-4 text-[0.9375rem] leading-[1.375rem] text-fg-muted">{body}</p>}
       <div className="flex flex-col gap-3">
         <ArmedDangerButton label={confirmLabel} onPress={onConfirm} />
-        <button onClick={onClose} className="h-14 rounded-[16px] bg-bg-2 text-[15px] font-semibold">
+        <button onClick={onClose} className="h-14 rounded-[1rem] bg-bg-2 text-[0.9375rem] font-semibold">
           Cancel
         </button>
       </div>

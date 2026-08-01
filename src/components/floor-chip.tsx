@@ -7,7 +7,7 @@ export function FloorChip({ station, className }: { station: Station | null; cla
     return (
       <span
         className={cn(
-          "overline-label inline-flex h-[22px] items-center rounded-[8px] bg-bg-2 px-2 text-fg-faint",
+          "overline-label inline-flex h-[1.375rem] items-center rounded-[0.5rem] bg-bg-2 px-2 text-fg-faint",
           className,
         )}
       >
@@ -18,7 +18,7 @@ export function FloorChip({ station, className }: { station: Station | null; cla
   return (
     <span
       className={cn(
-        "overline-label inline-flex h-[22px] items-center rounded-[8px] px-2",
+        "overline-label inline-flex h-[1.375rem] items-center rounded-[0.5rem] px-2",
         station.floor === 1 ? "bg-accent-2-dim text-accent-2" : "bg-accent-dim text-accent",
         className,
       )}

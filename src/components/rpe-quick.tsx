@@ -30,7 +30,7 @@ function Chip({
         haptic("select");
         onSelect(v);
       }}
-      className={cn("tnum h-11 min-w-[52px] shrink-0 rounded-[12px] border text-[15px] font-semibold")}
+      className={cn("tnum h-11 min-w-[3.25rem] shrink-0 rounded-[0.75rem] border text-[0.9375rem] font-semibold")}
       style={
         selected
           ? { background: c, borderColor: c, color: "var(--color-accent-ink)" }
@@ -70,11 +70,11 @@ export function RpeQuick({
     <div className="flex items-center gap-3">
       <button
         onClick={() => setHelpOpen(true)}
-        className="flex w-[74px] shrink-0 items-center gap-1 text-left"
+        className="flex w-[4.625rem] shrink-0 items-center gap-1 text-left"
         aria-label="What is RPE?"
       >
         <span className="overline-label text-fg-faint">RPE</span>
-        <CircleHelp size={14} className="text-fg-faint" />
+        <CircleHelp size="0.875rem" className="text-fg-faint" />
       </button>
       <div className={cn("flex flex-1 gap-2", isLastSet && "no-scrollbar overflow-x-auto")}>
         {quick.map((v) => (
@@ -87,11 +87,11 @@ export function RpeQuick({
           {([6, 7, 8, 9, 10] as const).map((v) => (
             <div key={v} className="flex items-center gap-3">
               <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: rpeColor(v) }} />
-              <span className="tnum w-14 text-[15px] font-semibold">RPE {v}</span>
-              <span className="text-[15px] leading-[22px] text-fg-muted">{RPE_SCALE[v]}</span>
+              <span className="tnum w-14 text-[0.9375rem] font-semibold">RPE {v}</span>
+              <span className="text-[0.9375rem] leading-[1.375rem] text-fg-muted">{RPE_SCALE[v]}</span>
             </div>
           ))}
-          <p className="mt-1 text-[13px] leading-[18px] text-fg-faint">{RPE_FOOTNOTE}</p>
+          <p className="mt-1 text-[0.8125rem] leading-[1.125rem] text-fg-faint">{RPE_FOOTNOTE}</p>
         </div>
       </Sheet>
     </div>

@@ -34,13 +34,13 @@ export function TabBar() {
                 <motion.span
                   layoutId="tab-pill"
                   transition={springPill}
-                  className="absolute top-0 h-[3px] w-7 rounded-full bg-accent"
+                  className="absolute top-0 h-[0.1875rem] w-7 rounded-full bg-accent"
                 />
               )}
-              <Icon size={24} className={active ? "text-accent" : "text-fg-faint"} />
+              <Icon size="1.5rem" className={active ? "text-accent" : "text-fg-faint"} />
               <span
                 className={cn(
-                  "text-[11px] font-medium leading-[14px]",
+                  "text-[0.6875rem] font-medium leading-[0.875rem]",
                   active ? "text-accent" : "text-fg-faint",
                 )}
               >

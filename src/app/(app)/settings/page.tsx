@@ -18,14 +18,14 @@ function Toggle({ on, onChange }: { on: boolean; onChange: (v: boolean) => void 
         onChange(!on);
       }}
       className={cn(
-        "relative h-8 w-[52px] shrink-0 rounded-full transition-colors duration-150",
+        "relative h-8 w-[3.25rem] shrink-0 rounded-full transition-colors duration-150",
         on ? "bg-accent" : "bg-bg-3",
       )}
     >
       <span
         className={cn(
           "absolute top-1 h-6 w-6 rounded-full bg-fg transition-[left] duration-150",
-          on ? "left-[24px] bg-accent-ink" : "left-1",
+          on ? "left-[1.5rem] bg-accent-ink" : "left-1",
         )}
       />
     </button>
@@ -36,8 +36,8 @@ function Row({ label, hint, children }: { label: string; hint?: string; children
   return (
     <div className="flex min-h-14 items-center gap-3 px-4 py-2">
       <div className="min-w-0 flex-1">
-        <div className="text-[15px] font-medium">{label}</div>
-        {hint && <div className="mt-0.5 text-[13px] leading-[18px] text-fg-muted">{hint}</div>}
+        <div className="text-[0.9375rem] font-medium">{label}</div>
+        {hint && <div className="mt-0.5 text-[0.8125rem] leading-[1.125rem] text-fg-muted">{hint}</div>}
       </div>
       {children}
     </div>
@@ -48,7 +48,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <motion.section variants={fadeUp}>
       <h2 className="overline-label mb-2 px-1 text-fg-faint">{title}</h2>
-      <div className="divide-y divide-line rounded-[20px] bg-bg-1">{children}</div>
+      <div className="divide-y divide-line rounded-[1.25rem] bg-bg-1">{children}</div>
     </motion.section>
   );
 }
@@ -59,8 +59,8 @@ export default function SettingsPage() {
   if (!s) {
     return (
       <div className="px-5 pt-4 safe-top">
-        <div className="skeleton h-9 w-40 rounded-[8px]" />
-        <div className="skeleton mt-6 h-40 w-full rounded-[20px]" />
+        <div className="skeleton h-9 w-40 rounded-[0.5rem]" />
+        <div className="skeleton mt-6 h-40 w-full rounded-[1.25rem]" />
       </div>
     );
   }
@@ -72,7 +72,7 @@ export default function SettingsPage() {
       animate="show"
       className="flex flex-col gap-6 px-5 pt-4 safe-top"
     >
-      <motion.h1 variants={fadeUp} className="font-display text-[30px] font-semibold leading-[34px]">
+      <motion.h1 variants={fadeUp} className="font-display text-[1.875rem] font-semibold leading-[2.125rem]">
         Settings
       </motion.h1>
 
@@ -82,7 +82,7 @@ export default function SettingsPage() {
           hint="Six sessions in a rolling cycle — each one suggests the next, so a missed day never drops a session. Sunday is the rest day; training anyway is always one tap away."
         />
         <Row label="Units" hint="Kilograms, like the plates.">
-          <span className="tnum text-[15px] text-fg-muted">kg</span>
+          <span className="tnum text-[0.9375rem] text-fg-muted">kg</span>
         </Row>
       </Section>
 
@@ -99,7 +99,7 @@ export default function SettingsPage() {
               haptic("setDone");
               chime();
             }}
-            className="h-10 rounded-[12px] bg-bg-2 px-4 text-[13px] font-semibold"
+            className="h-10 rounded-[0.75rem] bg-bg-2 px-4 text-[0.8125rem] font-semibold"
           >
             Play
           </button>

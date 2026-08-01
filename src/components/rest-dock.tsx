@@ -10,7 +10,9 @@ import { cn } from "@/lib/utils";
 import { Sheet } from "./sheet";
 import type { RestTimerState } from "./use-rest-timer";
 
+/* viewBox units; rendered at a rem size so it scales with the phone. */
 const RING = 44;
+const RING_REM = `${RING / 16}rem`;
 const RING_R = 19;
 const CIRC = 2 * Math.PI * RING_R;
 
@@ -52,13 +54,17 @@ export function RestDock({
             animate={{ y: 0, transition: springSheet }}
             exit={{ y: "110%", transition: { duration: 0.24 } }}
             className={cn(
-              "fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-md rounded-t-[28px] border-t border-line bg-bg-3 safe-bottom",
+              "fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-md rounded-t-[1.75rem] border-t border-line bg-bg-3 safe-bottom",
               done && "bg-accent-2-dim",
             )}
           >
-            <button className="flex h-[76px] w-full items-center gap-3 px-5" onClick={() => setExpanded(true)}>
+            <button className="flex h-[4.75rem] w-full items-center gap-3 px-5" onClick={() => setExpanded(true)}>
               {/* depleting ring */}
-              <svg width={RING} height={RING} viewBox={`0 0 ${RING} ${RING}`} className="shrink-0 -rotate-90">
+              <svg
+                style={{ width: RING_REM, height: RING_REM }}
+                viewBox={`0 0 ${RING} ${RING}`}
+                className="shrink-0 -rotate-90"
+              >
                 <circle cx={RING / 2} cy={RING / 2} r={RING_R} fill="none" stroke="var(--color-line)" strokeWidth="4" />
                 <circle
                   cx={RING / 2}
@@ -76,22 +82,22 @@ export function RestDock({
               <div className="flex-1 text-left">
                 {done ? (
                   <>
-                    <div className="tnum text-[28px] font-medium leading-8 text-accent-2">GO</div>
-                    <div className="text-[13px] leading-[18px] text-fg-muted">
+                    <div className="tnum text-[1.75rem] font-medium leading-8 text-accent-2">GO</div>
+                    <div className="text-[0.8125rem] leading-[1.125rem] text-fg-muted">
                       {cameBackLate ? `Rest over — ${formatOverdue(overdueMs)}` : nextLabel}
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="tnum text-[28px] font-medium leading-8">{formatClock(remainingMs)}</div>
-                    <div className="text-[13px] leading-[18px] text-fg-muted">rest · {nextLabel}</div>
+                    <div className="tnum text-[1.75rem] font-medium leading-8">{formatClock(remainingMs)}</div>
+                    <div className="text-[0.8125rem] leading-[1.125rem] text-fg-muted">rest · {nextLabel}</div>
                   </>
                 )}
               </div>
 
               <span
                 role="button"
-                className="tnum flex h-14 w-[72px] items-center justify-center rounded-[12px] border border-line-strong bg-bg-2 text-[15px] font-semibold"
+                className="tnum flex h-14 w-[4.5rem] items-center justify-center rounded-[0.75rem] border border-line-strong bg-bg-2 text-[0.9375rem] font-semibold"
                 onClick={(e) => {
                   e.stopPropagation();
                   haptic("select");
@@ -108,27 +114,27 @@ export function RestDock({
 
       <Sheet open={expanded && !!timer} onClose={() => setExpanded(false)}>
         <div className="flex flex-col items-center gap-2 pb-2 pt-4">
-          <div className="tnum text-[72px] font-medium leading-[76px]">
+          <div className="tnum text-[4.5rem] font-medium leading-[4.75rem]">
             {done ? "GO" : formatClock(remainingMs)}
           </div>
-          <div className="text-[13px] text-fg-muted">
+          <div className="text-[0.8125rem] text-fg-muted">
             {done ? nextLabel : `ends ${endsAtLabel} · ${nextLabel}`}
           </div>
           <div className="mt-4 flex w-full gap-2">
             <button
-              className="tnum h-14 flex-1 rounded-[16px] bg-bg-2 text-[15px] font-semibold"
+              className="tnum h-14 flex-1 rounded-[1rem] bg-bg-2 text-[0.9375rem] font-semibold"
               onClick={() => onExtend(-30)}
             >
               −30s
             </button>
             <button
-              className="tnum h-14 flex-1 rounded-[16px] bg-bg-2 text-[15px] font-semibold"
+              className="tnum h-14 flex-1 rounded-[1rem] bg-bg-2 text-[0.9375rem] font-semibold"
               onClick={() => onExtend(30)}
             >
               +30s
             </button>
             <button
-              className="h-14 flex-1 rounded-[16px] bg-bg-2 text-[15px] font-semibold text-fg-muted"
+              className="h-14 flex-1 rounded-[1rem] bg-bg-2 text-[0.9375rem] font-semibold text-fg-muted"
               onClick={() => {
                 setExpanded(false);
                 onSkip();
@@ -155,7 +161,7 @@ function SkipControl({ onSkip }: { onSkip: () => void }) {
       role="button"
       aria-disabled={!armed}
       className={cn(
-        "flex h-14 w-14 items-center justify-center rounded-[12px] text-fg-muted",
+        "flex h-14 w-14 items-center justify-center rounded-[0.75rem] text-fg-muted",
         !armed && "opacity-40",
       )}
       onClick={(e) => {
@@ -165,7 +171,7 @@ function SkipControl({ onSkip }: { onSkip: () => void }) {
         onSkip();
       }}
     >
-      <SkipForward size={20} />
+      <SkipForward size="1.25rem" />
     </span>
   );
 }

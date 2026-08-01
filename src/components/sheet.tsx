@@ -75,12 +75,12 @@ export function Sheet({
             if (info.velocity.y > 800 || info.offset.y > h * 0.45) onClose();
           }}
           className={cn(
-            "rounded-t-[28px] bg-bg-3 px-5 safe-bottom",
+            "rounded-t-[1.75rem] bg-bg-3 px-5 safe-bottom",
             tall && "max-h-[85dvh] overflow-y-auto",
           )}
         >
           <div className="mx-auto mb-3 mt-2 h-1 w-9 rounded-full bg-line-strong" />
-          {title && <h2 className="mb-4 text-[17px] font-semibold tracking-tight">{title}</h2>}
+          {title && <h2 className="mb-4 text-[1.0625rem] font-semibold tracking-tight">{title}</h2>}
           <div className="pb-4">{children}</div>
         </motion.div>
       </div>

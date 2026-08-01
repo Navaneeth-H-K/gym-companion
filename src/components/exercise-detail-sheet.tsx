@@ -46,33 +46,33 @@ export function ExerciseDetailSheet({
     <Sheet open={open} onClose={onClose} tall>
       {/* photo */}
       {station?.photo ? (
-        <div className="relative h-44 w-full overflow-hidden rounded-[20px]">
+        <div className="relative h-44 w-full overflow-hidden rounded-[1.25rem]">
           <Image src={station.photo} alt={station.name} fill unoptimized className="object-cover" />
-          <div className="absolute bottom-0 left-0 flex items-center gap-2 rounded-tr-[12px] bg-black/65 px-3 py-1.5">
+          <div className="absolute bottom-0 left-0 flex items-center gap-2 rounded-tr-[0.75rem] bg-black/65 px-3 py-1.5">
             <FloorChip station={station} />
-            <span className="text-[13px] font-medium">{station.name}</span>
+            <span className="text-[0.8125rem] font-medium">{station.name}</span>
           </div>
         </div>
       ) : (
-        <div className="flex h-32 w-full flex-col items-center justify-center gap-2 rounded-[20px] border border-line bg-bg-2">
-          <Dumbbell size={24} className="text-fg-faint" />
+        <div className="flex h-32 w-full flex-col items-center justify-center gap-2 rounded-[1.25rem] border border-line bg-bg-2">
+          <Dumbbell size="1.5rem" className="text-fg-faint" />
           <span className="overline-label text-fg-faint">photo pending</span>
         </div>
       )}
 
-      <h2 className="mt-4 font-display text-[24px] font-semibold leading-[28px]">{info.name}</h2>
+      <h2 className="mt-4 font-display text-[1.5rem] font-semibold leading-[1.75rem]">{info.name}</h2>
 
       {slot && (
-        <p className="tnum mt-1 text-[13px] text-fg-muted">
+        <p className="tnum mt-1 text-[0.8125rem] text-fg-muted">
           {formatSetsReps(slot)} @ RPE {formatRpe(slot.rpe)} · rest {formatRest(slot.restSec)}
         </p>
       )}
 
       {/* wayfinding */}
       {station && (
-        <div className="mt-3 flex items-start gap-2 rounded-[16px] bg-bg-2 p-3">
-          <MapPin size={16} className="mt-0.5 shrink-0 text-accent-2" />
-          <p className="text-[13px] leading-[18px] text-fg-muted">
+        <div className="mt-3 flex items-start gap-2 rounded-[1rem] bg-bg-2 p-3">
+          <MapPin size="1rem" className="mt-0.5 shrink-0 text-accent-2" />
+          <p className="text-[0.8125rem] leading-[1.125rem] text-fg-muted">
             <span className="font-medium text-fg">
               F{station.floor} · {station.area}.
             </span>{" "}
@@ -82,7 +82,7 @@ export function ExerciseDetailSheet({
       )}
 
       {houseNote && (
-        <p className="mt-2 border-l-2 border-accent pl-3 text-[13px] leading-[18px] text-fg-muted">
+        <p className="mt-2 border-l-2 border-accent pl-3 text-[0.8125rem] leading-[1.125rem] text-fg-muted">
           {houseNote}
         </p>
       )}
@@ -90,12 +90,12 @@ export function ExerciseDetailSheet({
       {/* muscles */}
       <div className="mt-4 flex flex-wrap gap-1.5">
         {info.primaryMuscles.map((m) => (
-          <span key={m} className="rounded-[8px] bg-accent-dim px-2 py-1 text-[13px] font-medium text-accent">
+          <span key={m} className="rounded-[0.5rem] bg-accent-dim px-2 py-1 text-[0.8125rem] font-medium text-accent">
             {MUSCLE_LABELS[m]}
           </span>
         ))}
         {info.secondaryMuscles.map((m) => (
-          <span key={m} className="rounded-[8px] bg-bg-2 px-2 py-1 text-[13px] text-fg-muted">
+          <span key={m} className="rounded-[0.5rem] bg-bg-2 px-2 py-1 text-[0.8125rem] text-fg-muted">
             {MUSCLE_LABELS[m]}
           </span>
         ))}
@@ -105,8 +105,8 @@ export function ExerciseDetailSheet({
       {cues.length > 0 && (
         <ul className="mt-4 flex flex-col gap-2">
           {cues.map((cue) => (
-            <li key={cue} className="relative pl-4 text-[15px] leading-[22px] text-fg-muted">
-              <span className="absolute left-0 top-[9px] h-[5px] w-[5px] rounded-full bg-accent" />
+            <li key={cue} className="relative pl-4 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
+              <span className="absolute left-0 top-[0.5625rem] h-[0.3125rem] w-[0.3125rem] rounded-full bg-accent" />
               {cue}
             </li>
           ))}
@@ -122,7 +122,7 @@ export function ExerciseDetailSheet({
             className="flex h-10 w-10 items-center justify-center text-fg-faint"
             onClick={() => setEditingSetup(true)}
           >
-            <Pencil size={14} />
+            <Pencil size="0.875rem" />
           </button>
         </div>
         {editingSetup ? (
@@ -137,13 +137,13 @@ export function ExerciseDetailSheet({
             onKeyDown={(e) => {
               if (e.key === "Enter") (e.target as HTMLInputElement).blur();
             }}
-            className="tnum w-full rounded-[12px] border border-line-strong bg-bg-2 px-3 py-2.5 text-[13px] outline-none"
+            className="tnum w-full rounded-[0.75rem] border border-line-strong bg-bg-2 px-3 py-2.5 text-[0.8125rem] outline-none"
           />
         ) : (
           <button
             onClick={() => setEditingSetup(true)}
             className={cn(
-              "tnum w-full rounded-[12px] bg-bg-2 px-3 py-2.5 text-left text-[13px]",
+              "tnum w-full rounded-[0.75rem] bg-bg-2 px-3 py-2.5 text-left text-[0.8125rem]",
               setup ? "text-fg" : "text-fg-faint",
             )}
           >
@@ -158,7 +158,7 @@ export function ExerciseDetailSheet({
           <span className="overline-label text-fg-faint">recent</span>
           <div className="mt-2 flex flex-col gap-1.5">
             {history.map((h) => (
-              <div key={h.sessionId} className="flex items-baseline justify-between text-[13px]">
+              <div key={h.sessionId} className="flex items-baseline justify-between text-[0.8125rem]">
                 <span className="text-fg-faint">{h.dateKey ? humanDate(h.dateKey) : "—"}</span>
                 <span className="tnum text-fg-muted">
                   {h.sets

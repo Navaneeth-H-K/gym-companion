@@ -100,10 +100,10 @@ export default function TodayPage() {
   if (loading) {
     return (
       <div className="px-5 pt-4 safe-top">
-        <div className="skeleton h-4 w-28 rounded-[8px]" />
-        <div className="skeleton mx-auto mt-8 h-[220px] w-[220px] rounded-full" />
-        <div className="skeleton mt-8 h-[128px] w-full rounded-[28px]" />
-        <div className="skeleton mt-6 h-10 w-full rounded-[16px]" />
+        <div className="skeleton h-4 w-28 rounded-[0.5rem]" />
+        <div className="skeleton mx-auto mt-8 h-[13.75rem] w-[13.75rem] rounded-full" />
+        <div className="skeleton mt-8 h-[8rem] w-full rounded-[1.75rem]" />
+        <div className="skeleton mt-6 h-10 w-full rounded-[1rem]" />
       </div>
     );
   }
@@ -114,7 +114,7 @@ export default function TodayPage() {
       {/* status row */}
       <motion.div variants={fadeUp} className="flex h-8 items-center justify-between">
         <span className="overline-label text-fg-faint">{humanDate(today)}</span>
-        {!online && <CloudOff size={16} className="text-fg-faint" />}
+        {!online && <CloudOff size="1rem" className="text-fg-faint" />}
       </motion.div>
 
       {/* ring hero */}
@@ -128,52 +128,52 @@ export default function TodayPage() {
       </motion.button>
 
       {/* session card */}
-      <motion.div variants={fadeUp} className="mt-6 rounded-[28px] bg-bg-1 p-4">
+      <motion.div variants={fadeUp} className="mt-6 rounded-[1.75rem] bg-bg-1 p-4">
         {active ? (
           <>
             <div className="overline-label text-accent">In progress · {PROGRAM[active.dayKey].title}</div>
             <div className="mt-1 flex items-center justify-between gap-3">
-              <h1 className="font-display text-[30px] font-semibold leading-[34px]">
+              <h1 className="font-display text-[1.875rem] font-semibold leading-[2.125rem]">
                 {PROGRAM[active.dayKey].title}
               </h1>
               <StationPhoto station={firstResolved.station} size={64} />
             </div>
             {stale && (
-              <p className="mt-2 text-[13px] leading-[18px] text-fg-muted">
+              <p className="mt-2 text-[0.8125rem] leading-[1.125rem] text-fg-muted">
                 Still going? Finish &amp; save from inside the workout, or discard it here.
               </p>
             )}
             <div className="mt-4 flex gap-2">
               <button
                 onClick={() => router.push(`/workout/${active.id}`)}
-                className="h-14 flex-1 rounded-[16px] bg-accent text-[16px] font-semibold text-accent-ink"
+                className="h-14 flex-1 rounded-[1rem] bg-accent text-[1rem] font-semibold text-accent-ink"
               >
                 Resume — {workingLogged} sets · {activeMinutes} min
               </button>
               <button
                 aria-label="Session options"
                 onClick={() => setDiscardOpen(true)}
-                className="flex h-14 w-14 items-center justify-center rounded-[16px] border border-line-strong text-fg-muted"
+                className="flex h-14 w-14 items-center justify-center rounded-[1rem] border border-line-strong text-fg-muted"
               >
-                <EllipsisVertical size={20} />
+                <EllipsisVertical size="1.25rem" />
               </button>
             </div>
           </>
         ) : plan.suggestion === "rest" ? (
           <>
             <div className="flex items-center gap-2">
-              <Moon size={18} className="text-accent-2" />
+              <Moon size="1.125rem" className="text-accent-2" />
               <span className="overline-label text-accent-2">Rest day</span>
             </div>
-            <h1 className="mt-1 font-display text-[30px] font-semibold leading-[34px]">
+            <h1 className="mt-1 font-display text-[1.875rem] font-semibold leading-[2.125rem]">
               Sunday. Go eat.
             </h1>
-            <p className="mt-2 text-[15px] leading-[22px] text-fg-muted">
+            <p className="mt-2 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
               Next up tomorrow: {day.title} — {day.focusLabel}.
             </p>
             <button
               onClick={() => setPickerOpen(true)}
-              className="mt-4 h-14 w-full rounded-[16px] border border-line-strong text-[15px] font-semibold text-fg-muted"
+              className="mt-4 h-14 w-full rounded-[1rem] border border-line-strong text-[0.9375rem] font-semibold text-fg-muted"
             >
               Train anyway
             </button>
@@ -181,15 +181,15 @@ export default function TodayPage() {
         ) : plan.suggestion === "done" ? (
           <>
             <div className="overline-label text-accent">Done today · {PROGRAM[plan.doneToday!].title}</div>
-            <h1 className="mt-1 font-display text-[30px] font-semibold leading-[34px]">
+            <h1 className="mt-1 font-display text-[1.875rem] font-semibold leading-[2.125rem]">
               Session banked
             </h1>
-            <p className="mt-2 text-[15px] leading-[22px] text-fg-muted">
+            <p className="mt-2 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
               Next up: {day.title} — {day.focusLabel}.
             </p>
             <button
               onClick={() => setPickerOpen(true)}
-              className="mt-4 h-14 w-full rounded-[16px] border border-line-strong text-[15px] font-semibold text-fg-muted"
+              className="mt-4 h-14 w-full rounded-[1rem] border border-line-strong text-[0.9375rem] font-semibold text-fg-muted"
             >
               Go again
             </button>
@@ -199,8 +199,8 @@ export default function TodayPage() {
             <div className="overline-label text-accent">Next up · {day.title}</div>
             <div className="mt-1 flex items-center justify-between gap-3">
               <div>
-                <h1 className="font-display text-[30px] font-semibold leading-[34px]">{day.title}</h1>
-                <p className="mt-1 text-[13px] leading-[18px] text-fg-muted">
+                <h1 className="font-display text-[1.875rem] font-semibold leading-[2.125rem]">{day.title}</h1>
+                <p className="mt-1 text-[0.8125rem] leading-[1.125rem] text-fg-muted">
                   {day.slots.length} exercises · ~{day.estMinutes.min}–{day.estMinutes.max} min · {floors}
                 </p>
               </div>
@@ -208,13 +208,13 @@ export default function TodayPage() {
             </div>
             <button
               onClick={() => start(plan.dayKey)}
-              className="mt-4 h-14 w-full rounded-[16px] bg-accent text-[16px] font-semibold text-accent-ink active:scale-[0.97]"
+              className="mt-4 h-14 w-full rounded-[1rem] bg-accent text-[1rem] font-semibold text-accent-ink active:scale-[0.97]"
             >
               Start workout
             </button>
             <button
               onClick={() => setPickerOpen(true)}
-              className="mt-2 h-10 w-full text-[13px] font-medium text-fg-faint"
+              className="mt-2 h-10 w-full text-[0.8125rem] font-medium text-fg-faint"
             >
               Not this one?
             </button>
@@ -260,7 +260,7 @@ export default function TodayPage() {
     />
 
     <Sheet open={infoOpen} onClose={() => setInfoOpen(false)} title="How the streak works">
-      <div className="flex flex-col gap-3 text-[15px] leading-[22px] text-fg-muted">
+      <div className="flex flex-col gap-3 text-[0.9375rem] leading-[1.375rem] text-fg-muted">
         <p>
           The ring is your current cycle — six sessions, in any order, on any days. Finish all six
           and it resets for the next round.

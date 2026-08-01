@@ -6,7 +6,10 @@ import { dur, easeOutExpo } from "@/lib/motion";
 import { DAY_ORDER, type DayKey } from "@/lib/program";
 import { cn } from "@/lib/utils";
 
+/* Geometry is expressed in viewBox units; the rendered size is rem, so the
+   ring scales with the phone alongside everything else. */
 const SIZE = 220;
+const SIZE_REM = `${SIZE / 16}rem`;
 const R = 102;
 const STROKE = 16;
 const ARC = 42; // degrees per segment
@@ -43,8 +46,8 @@ export function Ring({
   const nextIdx = DAY_ORDER.findIndex((d) => !cycleDone.includes(d));
 
   return (
-    <div className="relative mx-auto" style={{ width: SIZE, height: SIZE }}>
-      <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden>
+    <div className="relative mx-auto" style={{ width: SIZE_REM, height: SIZE_REM }}>
+      <svg className="h-full w-full" viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden>
         <defs>
           <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="var(--color-accent)" />
@@ -99,8 +102,8 @@ export function Ring({
 
       {/* center */}
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-1">
-        <Flame size={20} className="text-accent" />
-        <div className="font-display text-[44px] font-semibold leading-[48px] tracking-tight tnum">
+        <Flame size="1.25rem" className="text-accent" />
+        <div className="font-display text-[2.75rem] font-semibold leading-[3rem] tracking-tight tnum">
           {streak}
         </div>
         <div className="overline-label text-fg-faint">day streak</div>
@@ -108,7 +111,7 @@ export function Ring({
           {[0, 1].map((i) => (
             <Snowflake
               key={i}
-              size={16}
+              size="1rem"
               className={cn(i < freezeTokens ? "text-accent-2" : "text-line-strong")}
             />
           ))}

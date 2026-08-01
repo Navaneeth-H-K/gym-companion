@@ -80,12 +80,12 @@ export function FinishSummary({
         <motion.span variants={fadeUp} className="overline-label text-accent">
           session complete
         </motion.span>
-        <motion.h1 variants={fadeUp} className="mt-1 font-display text-[30px] font-semibold leading-[34px]">
+        <motion.h1 variants={fadeUp} className="mt-1 font-display text-[1.875rem] font-semibold leading-[2.125rem]">
           {dayTitle} banked
         </motion.h1>
 
         <motion.div variants={fadeUp} className="mt-8 flex flex-col items-center">
-          <span className="tnum font-display text-[44px] font-semibold leading-[48px]">
+          <span className="tnum font-display text-[2.75rem] font-semibold leading-[3rem]">
             {displayVolume.toLocaleString("en-IN")} kg
           </span>
           <span className="overline-label mt-1 text-fg-faint">total volume moved</span>
@@ -99,7 +99,7 @@ export function FinishSummary({
               label: "streak",
               value: (
                 <span className="flex items-center justify-center gap-1">
-                  <Flame size={18} className="text-accent" />
+                  <Flame size="1.125rem" className="text-accent" />
                   <motion.span
                     key={streakCurrent}
                     initial={{ y: 12, opacity: 0 }}
@@ -113,8 +113,8 @@ export function FinishSummary({
               ),
             },
           ].map((s) => (
-            <div key={s.label} className="rounded-[20px] bg-bg-1 p-4 text-center">
-              <div className="tnum text-[22px] font-medium leading-7">{s.value}</div>
+            <div key={s.label} className="rounded-[1.25rem] bg-bg-1 p-4 text-center">
+              <div className="tnum text-[1.375rem] font-medium leading-7">{s.value}</div>
               <div className="overline-label mt-1 text-fg-faint">{s.label}</div>
             </div>
           ))}
@@ -128,10 +128,10 @@ export function FinishSummary({
                 initial={{ opacity: 0, x: 12 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.4 + i * 0.08, duration: dur.gentle, ease: easeOutExpo }}
-                className="flex items-center gap-3 rounded-[16px] bg-bg-1 px-4 py-3"
+                className="flex items-center gap-3 rounded-[1rem] bg-bg-1 px-4 py-3"
               >
-                <Trophy size={16} className="shrink-0 text-gold" />
-                <span className="tnum text-[15px] font-semibold">{prLabel(r)}</span>
+                <Trophy size="1rem" className="shrink-0 text-gold" />
+                <span className="tnum text-[0.9375rem] font-semibold">{prLabel(r)}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -141,7 +141,7 @@ export function FinishSummary({
       <div className={cn("sticky bottom-0 bg-bg py-4 safe-bottom")}>
         <button
           onClick={onDone}
-          className="h-14 w-full rounded-[16px] bg-accent text-[16px] font-semibold text-accent-ink"
+          className="h-14 w-full rounded-[1rem] bg-accent text-[1rem] font-semibold text-accent-ink"
         >
           Done
         </button>

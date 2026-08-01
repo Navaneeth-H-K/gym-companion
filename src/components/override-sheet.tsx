@@ -28,21 +28,21 @@ function Option({
     <button
       onClick={() => onPick(id)}
       className={cn(
-        "flex w-full items-center gap-3 rounded-[16px] border bg-bg-2 p-3 text-left",
+        "flex w-full items-center gap-3 rounded-[1rem] border bg-bg-2 p-3 text-left",
         selected ? "border-accent" : "border-transparent",
       )}
     >
       <StationPhoto station={r.station} size={48} />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-[15px] font-semibold">{EXERCISES[id].name}</span>
+        <span className="block truncate text-[0.9375rem] font-semibold">{EXERCISES[id].name}</span>
         <span className="mt-0.5 flex items-center gap-1.5">
           <FloorChip station={r.station} />
-          <span className="truncate text-[13px] text-fg-muted">
+          <span className="truncate text-[0.8125rem] text-fg-muted">
             {note ?? r.station?.name ?? "location unknown"}
           </span>
         </span>
       </span>
-      {selected && <Check size={18} className="shrink-0 text-accent" />}
+      {selected && <Check size="1.125rem" className="shrink-0 text-accent" />}
     </button>
   );
 }
@@ -93,7 +93,7 @@ export function OverrideSheet({
           <select
             value={standard.includes(picked) ? "" : picked}
             onChange={(e) => e.target.value && setPicked(e.target.value as ExerciseId)}
-            className="h-12 w-full rounded-[12px] border border-line-strong bg-bg-2 px-3 text-[15px] outline-none"
+            className="h-12 w-full rounded-[0.75rem] border border-line-strong bg-bg-2 px-3 text-[0.9375rem] outline-none"
           >
             <option value="" disabled>
               Pick any exercise…
@@ -109,7 +109,7 @@ export function OverrideSheet({
         ) : (
           <button
             onClick={() => setCustomOpen(true)}
-            className="h-12 rounded-[16px] border border-dashed border-line-strong text-[13px] font-medium text-fg-muted"
+            className="h-12 rounded-[1rem] border border-dashed border-line-strong text-[0.8125rem] font-medium text-fg-muted"
           >
             Something else…
           </button>
@@ -118,11 +118,11 @@ export function OverrideSheet({
 
       <button
         onClick={() => void save()}
-        className="mt-4 h-14 w-full rounded-[16px] bg-accent text-[15px] font-semibold text-accent-ink"
+        className="mt-4 h-14 w-full rounded-[1rem] bg-accent text-[0.9375rem] font-semibold text-accent-ink"
       >
         Save as my version
       </button>
-      <p className="mt-2 text-center text-[13px] text-fg-faint">
+      <p className="mt-2 text-center text-[0.8125rem] text-fg-faint">
         Applies every week until changed. Progression history stays per exercise.
       </p>
     </Sheet>

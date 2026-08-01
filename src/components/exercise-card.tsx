@@ -19,7 +19,11 @@ import { StationPhoto } from "./station-photo";
 
 function CheckDraw({ className }: { className?: string }) {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" className={className} aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      className={cn("h-[1.25rem] w-[1.25rem]", className)}
+      aria-hidden
+    >
       <motion.path
         d="M5 13l4 4L19 7"
         fill="none"
@@ -120,22 +124,22 @@ export function ExerciseCard({
         layout
         transition={springGentle}
         onClick={onToggle}
-        className="flex h-14 w-full items-center gap-3 rounded-[16px] bg-bg-1 px-4 text-left"
+        className="flex h-14 w-full items-center gap-3 rounded-[1rem] bg-bg-1 px-4 text-left"
       >
-        <span className="tnum w-5 text-[13px] text-fg-faint">{index + 1}</span>
-        <span className="min-w-0 flex-1 truncate text-[15px] font-semibold">{info.name}</span>
+        <span className="tnum w-5 text-[0.8125rem] text-fg-faint">{index + 1}</span>
+        <span className="min-w-0 flex-1 truncate text-[0.9375rem] font-semibold">{info.name}</span>
         <FloorChip station={resolved.station} />
-        <span className={cn("tnum text-[13px]", done ? "text-accent" : "text-fg-faint")}>
+        <span className={cn("tnum text-[0.8125rem]", done ? "text-accent" : "text-fg-faint")}>
           {working.length}/{slot.workingSets}
         </span>
-        {done ? <Check size={16} className="text-accent" /> : <ChevronDown size={16} className="text-fg-faint" />}
+        {done ? <Check size="1rem" className="text-accent" /> : <ChevronDown size="1rem" className="text-fg-faint" />}
       </motion.button>
     );
   }
 
   /* ----------------------------------------------------- expanded card */
   return (
-    <motion.div layout transition={springGentle} className="rounded-[24px] bg-bg-1 p-4">
+    <motion.div layout transition={springGentle} className="rounded-[1.5rem] bg-bg-1 p-4">
       {/* station block */}
       <div className="flex items-center gap-3">
         <button onClick={onDetail} aria-label="Exercise details">
@@ -144,70 +148,71 @@ export function ExerciseCard({
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <FloorChip station={resolved.station} />
-            <span className="truncate text-[15px] font-semibold">
+            <span className="truncate text-[0.9375rem] font-semibold">
               {resolved.station?.name ?? "location unknown"}
             </span>
           </div>
           {resolved.station && (
-            <p className="mt-0.5 line-clamp-2 text-[13px] leading-[18px] text-fg-faint">
+            <p className="mt-0.5 line-clamp-2 text-[0.8125rem] leading-[1.125rem] text-fg-faint">
               {resolved.station.howToFind}
             </p>
           )}
         </div>
         <button
           onClick={onBusy}
-          className="flex h-14 w-16 flex-col items-center justify-center gap-0.5 rounded-[12px] border border-line-strong text-fg-muted"
+          className="flex h-14 w-16 flex-col items-center justify-center gap-0.5 rounded-[0.75rem] border border-line-strong text-fg-muted"
         >
-          <Users size={16} />
-          <span className="text-[11px] font-medium">Busy?</span>
+          <Users size="1rem" />
+          <span className="text-[0.6875rem] font-medium">Busy?</span>
         </button>
       </div>
 
       {/* title + prescription */}
       <button onClick={onDetail} className="mt-3 block text-left">
         <div className="flex items-center gap-2">
-          <h2 className="font-display text-[24px] font-semibold leading-[28px]">{info.name}</h2>
+          <h2 className="font-display text-[1.5rem] font-semibold leading-[1.75rem]">{info.name}</h2>
           {resolved.source === "swap" && (
-            <span className="overline-label shrink-0 rounded-[8px] bg-accent-dim px-1.5 py-0.5 text-accent">
+            <span className="overline-label shrink-0 rounded-[0.5rem] bg-accent-dim px-1.5 py-0.5 text-accent">
               today only
             </span>
           )}
           {resolved.source === "house" && (
-            <span className="overline-label shrink-0 rounded-[8px] bg-bg-2 px-1.5 py-0.5 text-fg-faint">
+            <span className="overline-label shrink-0 rounded-[0.5rem] bg-bg-2 px-1.5 py-0.5 text-fg-faint">
               house
             </span>
           )}
         </div>
-        <p className="tnum mt-1 text-[13px] text-fg-muted">
+        <p className="tnum mt-1 text-[0.8125rem] text-fg-muted">
           {formatSetsReps(slot)} @ RPE {formatRpe(slot.rpe)} · rest{" "}
           {restOverrideSec ? `${Math.round(restOverrideSec / 60)} min` : formatRest(slot.restSec)}
         </p>
-        {lastLine && <p className="tnum mt-0.5 text-[13px] text-fg-faint">Last: {lastLine}</p>}
+        {lastLine && <p className="tnum mt-0.5 text-[0.8125rem] text-fg-faint">Last: {lastLine}</p>}
       </button>
 
       {/* warm-up disclosure */}
       {wuCount > 0 && (
-        <div className="mt-3 rounded-[16px] border border-dashed border-line-strong">
+        <div className="mt-3 rounded-[1rem] border border-dashed border-line-strong">
           <button
-            className="flex h-12 w-full items-center justify-between px-3"
+            className="flex h-12 w-full items-center gap-2 px-3"
             onClick={() => setWarmupOpen((o) => !o)}
           >
-            <span className="text-[15px] font-semibold text-fg-muted">
+            <span className="shrink-0 whitespace-nowrap text-[0.9375rem] font-semibold text-fg-muted">
               Warm-up · {slot.warmupSets.min === slot.warmupSets.max ? wuCount : `${slot.warmupSets.min}–${slot.warmupSets.max}`} sets
             </span>
-            <span className="flex items-center gap-2">
-              {ladder.length > 0 && (
-                <span className="tnum text-[13px] text-fg-faint">
-                  {ladder.map((r) => `${r.weightKg}×${r.reps}`).join(" · ")}
-                </span>
-              )}
-              <ChevronDown size={16} className={cn("text-fg-faint transition-transform", warmupOpen && "rotate-180")} />
-            </span>
+            {ladder.length > 0 && (
+              <span className="tnum min-w-0 flex-1 truncate text-right text-[0.8125rem] text-fg-faint">
+                {ladder.map((r) => `${r.weightKg}×${r.reps}`).join(" · ")}
+              </span>
+            )}
+            <ChevronDown
+              size="1rem"
+              className={cn("ml-auto shrink-0 text-fg-faint transition-transform", ladder.length > 0 && "ml-0", warmupOpen && "rotate-180")}
+            />
           </button>
           {warmupOpen && (
             <div className="flex flex-col gap-1.5 px-3 pb-3">
               {ladder.length === 0 ? (
-                <p className="text-[13px] leading-[18px] text-fg-faint">
+                <p className="text-[0.8125rem] leading-[1.125rem] text-fg-faint">
                   Pick your working weight first — then rungs appear here. Rule of thumb: light →
                   heavier, {wuCount} sets, never near failure.
                 </p>
@@ -217,7 +222,7 @@ export function ExerciseCard({
                   return (
                     <div key={i} className="flex h-11 items-center gap-3">
                       <span className="overline-label w-7 text-fg-faint">W{i + 1}</span>
-                      <span className="tnum flex-1 text-[15px] text-fg-muted">
+                      <span className="tnum flex-1 text-[0.9375rem] text-fg-muted">
                         {logged ? `${fmtW(logged.weightKg)} × ${logged.reps}` : `${rung.weightKg} kg × ${rung.reps}`}
                       </span>
                       {logged ? (
@@ -225,7 +230,7 @@ export function ExerciseCard({
                       ) : (
                         <button
                           onClick={() => onLogWarmup(i, rung.weightKg, rung.reps)}
-                          className="flex h-9 w-14 items-center justify-center rounded-[8px] bg-bg-2 text-[13px] font-medium text-fg-muted"
+                          className="flex h-9 w-14 items-center justify-center rounded-[0.5rem] bg-bg-2 text-[0.8125rem] font-medium text-fg-muted"
                         >
                           done
                         </button>
@@ -275,10 +280,10 @@ export function ExerciseCard({
                 initial={{ backgroundColor: "var(--color-accent-dim)" }}
                 animate={{ backgroundColor: "rgba(0,0,0,0)" }}
                 onClick={() => onEditStart(logged.id)}
-                className="flex h-14 w-full items-center gap-3 rounded-[16px] border border-line px-3 text-left"
+                className="flex h-14 w-full items-center gap-3 rounded-[1rem] border border-line px-3 text-left"
               >
-                <span className="tnum w-5 text-[13px] text-fg-faint">{i + 1}</span>
-                <span className="tnum flex-1 text-[17px]">
+                <span className="tnum w-5 text-[0.8125rem] text-fg-faint">{i + 1}</span>
+                <span className="tnum flex-1 text-[1.0625rem]">
                   {fmtW(logged.weightKg)} × {logged.reps}
                 </span>
                 {pr && (
@@ -286,14 +291,14 @@ export function ExerciseCard({
                     initial={{ x: 12, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.32, ease: easeOutExpo, delay: 0.25 }}
-                    className="flex items-center gap-1 rounded-[8px] bg-gold px-1.5 py-0.5 text-[11px] font-bold text-gold-ink"
+                    className="flex items-center gap-1 rounded-[0.5rem] bg-gold px-1.5 py-0.5 text-[0.6875rem] font-bold text-gold-ink"
                   >
-                    <Trophy size={10} /> PR
+                    <Trophy size="0.625rem" /> PR
                   </motion.span>
                 )}
                 {logged.rpe != null && (
                   <span
-                    className="tnum rounded-[8px] px-1.5 py-0.5 text-[13px] font-semibold"
+                    className="tnum rounded-[0.5rem] px-1.5 py-0.5 text-[0.8125rem] font-semibold"
                     style={{
                       color: `var(--color-rpe-${String(logged.rpe).replace(".", "")})`,
                       background: `color-mix(in oklab, var(--color-rpe-${String(logged.rpe).replace(".", "")}) 12%, transparent)`,
@@ -333,9 +338,9 @@ export function ExerciseCard({
 
           const preview = prefillFor(i, lastSets, slot.reps.min);
           return (
-            <div key={`queued-${i}`} className="flex h-14 items-center gap-3 rounded-[16px] border border-line px-3 opacity-45">
-              <span className="tnum w-5 text-[13px] text-fg-faint">{i + 1}</span>
-              <span className="tnum flex-1 text-[17px] text-fg-faint">
+            <div key={`queued-${i}`} className="flex h-14 items-center gap-3 rounded-[1rem] border border-line px-3 opacity-45">
+              <span className="tnum w-5 text-[0.8125rem] text-fg-faint">{i + 1}</span>
+              <span className="tnum flex-1 text-[1.0625rem] text-fg-faint">
                 {preview.weightKg != null ? `${fmtW(preview.weightKg)} × ${preview.reps}` : `— × ${preview.reps}`}
               </span>
               <span className="h-5 w-5 rounded-full border border-line-strong" />

@@ -77,18 +77,18 @@ export function Stepper({
 
   return (
     <div className="flex items-center gap-3">
-      <span className="overline-label w-[74px] shrink-0 text-fg-faint">{label}</span>
+      <span className="overline-label w-[4.625rem] shrink-0 text-fg-faint">{label}</span>
       <button
         aria-label={`Decrease ${label}`}
         disabled={disabled}
-        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[12px] bg-bg-3 disabled:opacity-30"
+        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[0.75rem] bg-bg-3 disabled:opacity-30"
         onPointerDown={disabled ? undefined : dec.start}
         onPointerUp={dec.stop}
         onPointerLeave={dec.stop}
         onPointerCancel={dec.stop}
         onContextMenu={(e) => e.preventDefault()}
       >
-        <Minus size={20} />
+        <Minus size="1.25rem" />
       </button>
 
       <div key={shake} className={cn("flex h-14 flex-1 items-center justify-center", shake > 0 && "animate-shake")}>
@@ -102,7 +102,7 @@ export function Stepper({
               if (e.key === "Enter") (e.target as HTMLInputElement).blur();
             }}
             onFocus={(e) => e.target.select()}
-            className="tnum w-full bg-transparent text-center text-[32px] font-medium leading-9 text-fg outline-none"
+            className="tnum w-full bg-transparent text-center text-[2rem] font-medium leading-9 text-fg outline-none"
           />
         ) : (
           <button
@@ -117,7 +117,7 @@ export function Stepper({
               initial={{ scale: 1.05 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.09 }}
-              className="tnum inline-block text-[32px] font-medium leading-9"
+              className="tnum inline-block text-[2rem] font-medium leading-9"
             >
               {display ?? value}
             </motion.span>
@@ -128,14 +128,14 @@ export function Stepper({
       <button
         aria-label={`Increase ${label}`}
         disabled={disabled}
-        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[12px] bg-bg-3 disabled:opacity-30"
+        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[0.75rem] bg-bg-3 disabled:opacity-30"
         onPointerDown={disabled ? undefined : inc.start}
         onPointerUp={inc.stop}
         onPointerLeave={inc.stop}
         onPointerCancel={inc.stop}
         onContextMenu={(e) => e.preventDefault()}
       >
-        <Plus size={20} />
+        <Plus size="1.25rem" />
       </button>
     </div>
   );

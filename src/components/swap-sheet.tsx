@@ -45,10 +45,10 @@ export function SwapSheet({
     <Sheet open={open} onClose={onClose} title="Station busy — swap this exercise">
       <div className="flex flex-col gap-2">
         {/* current, dimmed */}
-        <div className="flex items-center gap-3 rounded-[16px] bg-bg-2 p-3 opacity-50">
+        <div className="flex items-center gap-3 rounded-[1rem] bg-bg-2 p-3 opacity-50">
           <StationPhoto station={resolved.station} size={40} />
           <div className="flex-1">
-            <div className="text-[15px] font-semibold">{currentInfo.name}</div>
+            <div className="text-[0.9375rem] font-semibold">{currentInfo.name}</div>
             <div className="overline-label mt-0.5 text-fg-faint">current</div>
           </div>
           <FloorChip station={resolved.station} />
@@ -65,18 +65,18 @@ export function SwapSheet({
                 if (locked) onOverride(subId);
                 else onSwap(subId);
               }}
-              className="flex items-center gap-3 rounded-[20px] bg-bg-2 p-3 text-left"
+              className="flex items-center gap-3 rounded-[1.25rem] bg-bg-2 p-3 text-left"
             >
               <StationPhoto station={subResolved.station} size={64} />
               <div className="min-w-0 flex-1">
-                <div className="text-[15px] font-semibold">{info.name}</div>
+                <div className="text-[0.9375rem] font-semibold">{info.name}</div>
                 <div className="mt-0.5 flex items-center gap-2">
                   <FloorChip station={subResolved.station} />
-                  <span className="truncate text-[13px] text-fg-muted">
+                  <span className="truncate text-[0.8125rem] text-fg-muted">
                     {subResolved.station?.name ?? "location unknown"}
                   </span>
                 </div>
-                <div className="mt-0.5 text-[13px] text-fg-faint">
+                <div className="mt-0.5 text-[0.8125rem] text-fg-faint">
                   {overlapLabel(resolved.performAs, subId)}
                 </div>
               </div>
@@ -85,7 +85,7 @@ export function SwapSheet({
         })}
       </div>
 
-      <p className="mt-3 text-[13px] leading-[18px] text-fg-faint">
+      <p className="mt-3 text-[0.8125rem] leading-[1.125rem] text-fg-faint">
         {locked
           ? "This slot already has logged sets, so today stays as-is — tapping a substitute makes it your version from the next session on."
           : "Swap applies to today only. Each exercise keeps its own history and progression."}
