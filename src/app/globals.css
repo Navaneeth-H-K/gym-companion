@@ -78,14 +78,29 @@
 
   /**
    * Fluid root size — the whole UI is authored in rem against a 375px
-   * reference (16px base), so every dimension scales with the phone's
-   * width instead of leaving dead margin on a bigger screen.
-   * 4.2667vw = 16/375. Clamped so tiny phones stay legible and tablets
-   * or desktop don't inflate into a comedy poster.
+   * reference (16px base), so every dimension scales with the viewport
+   * instead of leaving dead margin on a bigger screen. 4.2667vw = 16/375.
+   *
+   * Deliberately no upper bound: Chrome's "Desktop site" toggle forces a
+   * ~980px viewport and ignores `width=device-width`, and a ceiling here
+   * would strand the UI as a tiny column floating in the middle of it.
+   * Uncapped, the layout simply fills whatever it is handed.
    */
   html {
-    font-size: clamp(14px, 4.2667vw, 19px);
+    font-size: max(13px, 4.2667vw);
     -webkit-text-size-adjust: 100%;
+  }
+
+  /**
+   * Real desktops get a comfortable fixed column instead of an inflated
+   * one. Keyed on `pointer: fine` rather than width alone — a phone in
+   * desktop-site mode reports a desktop *width* but still a coarse
+   * pointer, and a width-only query would re-break exactly that case.
+   */
+  @media (min-width: 900px) and (pointer: fine) {
+    html {
+      font-size: 17px;
+    }
   }
 
   body {
