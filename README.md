@@ -21,10 +21,7 @@ And the practical one: my gym is large enough that finding equipment wastes real
 - **Progress** — history, streaks, and per-lift trends over time
 - **Settings** — configuration for the split, units, and gym location
 
-<!-- TODO: correct any of the above that I got wrong from the outside, and add a
-     line for the equipment map — where each machine sits on the gym floor. It's
-     the most unusual thing in this app and nothing above currently mentions it.
-     Say whether it lives in its own view or is attached to each exercise. -->
+
 
 ## Install it on your phone
 
