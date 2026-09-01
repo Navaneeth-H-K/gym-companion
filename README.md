@@ -10,12 +10,13 @@ Push/Pull/Legs at one particular gym — logged, located, and streaked.
 
 ## Why
 
-<!-- TODO: 2–4 sentences, first person. What was wrong with the alternatives you
-     tried, and what did you want instead? Be specific — "existing trackers are
-     bloated" is generic; "every app I tried made me tap through four screens to
-     log one set" is not. If the geolocation constraint exists because you were
-     logging sessions you hadn't actually done, say so. That kind of honesty
-     reads well. -->
+Three things I wanted that no tracker gave me together.
+
+My trainer gave me a Push/Pull/Legs split built around my own goals, and every app I tried wanted me to use its templates instead. I wanted the plan to be a fixed input, not something I re-entered every week.
+
+Knowing what to do was never the problem — showing up was. So the app is built around habit rather than logging: streaks, a clear plan for the day, and progress that only moves if I actually turn up.
+
+And the practical one: my gym is large enough that finding equipment wastes real time between sets. The app maps where each machine actually is, so the day's plan comes with a route through the floor rather than a list of names I then have to go hunting for.
 
 ## What it does
 
@@ -24,9 +25,10 @@ Push/Pull/Legs at one particular gym — logged, located, and streaked.
 - **Progress** — history, streaks, and per-lift trends over time
 - **Settings** — configuration for the split, units, and gym location
 
-<!-- TODO: correct any of the above that I got wrong from the outside, and add
-     anything genuinely distinctive. If sessions are location-verified, that
-     deserves its own line — it's the most unusual thing about this app. -->
+<!-- TODO: correct any of the above that I got wrong from the outside, and add a
+     line for the equipment map — where each machine sits on the gym floor. It's
+     the most unusual thing in this app and nothing above currently mentions it.
+     Say whether it lives in its own view or is attached to each exercise. -->
 
 ## Install it on your phone
 
@@ -66,9 +68,10 @@ No app store, no download. It's a PWA — open the site on your phone and add it
      Name the file. "See src/lib/streak.ts" lets someone verify you in ten
      seconds, which is worth more than any adjective you could use here.
 
-     Candidates, if you're deciding: offline logging reconciling on reconnect,
-     streak calculation across timezone changes or a missed day, indoor GPS
-     accuracy for the location check, or plan rebalancing after a skipped
+     Candidates, if you're deciding: how the equipment map is modelled and how
+     the day's exercises get ordered into a sensible route across the floor,
+     offline logging reconciling on reconnect, streak calculation across a
+     missed day or a timezone change, or plan rebalancing after a skipped
      session. Pick the one where your first two versions were actually wrong. -->
 
 ## Stack
